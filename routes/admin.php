@@ -105,5 +105,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         // Update Order Status
         Route::post('update_order_status',[OrdersController::class,'update_order_status']);
+        // Update Item  Status
+        Route::post('update_item_status',[OrdersController::class,'update_item_status']);
     });
 });

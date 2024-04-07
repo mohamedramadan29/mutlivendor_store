@@ -118,17 +118,18 @@
                             <form method="post" action="{{url('admin/update_order_status')}}">
                                 @csrf
                                 <input type="hidden" name="order_id" value="{{$order_details['id']}}">
-
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label class="form-label">  تعديل حاله الطلب  </label>
+                                            <label class="form-label"> تعديل حاله الطلب </label>
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-control select2" name="order_status">
-                                                <option> حدد حاله الطلب  </option>
+                                                <option> حدد حاله الطلب</option>
                                                 @foreach($order_statuss as $status)
-                                                    <option @if($order_details['order_status'] == $status['name']) selected @endif value="{{$status['name']}}"> {{$status['name']}} </option>
+                                                    <option
+                                                        @if($order_details['order_status'] == $status['name']) selected
+                                                        @endif value="{{$status['name']}}"> {{$status['name']}} </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -137,9 +138,9 @@
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label class="form-label">   </label>
+                                            <label class="form-label"> </label>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-sm"> تعديل الحاله  </button>
+                                        <button type="submit" class="btn btn-primary btn-sm"> تعديل الحاله</button>
                                     </div>
                                 </div>
 
@@ -249,7 +250,7 @@
                                     <th> اسم المنتج</th>
                                     <th> سعر المنتج</th>
                                     <th> الكميه</th>
-
+                                    <th> تعديل حالة المنتج  </th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -265,6 +266,37 @@
                                         <td> {{$product['product_name']}} </td>
                                         <td> {{$product['product_price']}} </td>
                                         <td> {{$product['product_qty']}} </td>
+                                        <td>
+                                            <form method="post" action="{{url('admin/update_item_status')}}">
+                                                @csrf
+                                                <input type="hidden" name="item_id" value="{{$product['id']}}">
+                                                <div class="form-group ">
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <select class="form-control select2" name="order_item_status">
+                                                                <option> حدد حالة المنتج </option>
+                                                                @foreach($order_statuss as $status)
+                                                                    <option
+                                                                        @if($product['item_status'] == $status['name']) selected
+                                                                        @endif value="{{$status['name']}}"> {{$status['name']}} </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group ">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <label class="form-label"> </label>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary btn-sm"> تعديل
+                                                            الحاله
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
