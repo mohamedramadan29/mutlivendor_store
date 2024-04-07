@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{asset('assets/website/css/mobile-menu.css')}}">
     <link rel="stylesheet" href="{{asset('assets/website/fonts/flaticon/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('assets/website/css/style.css')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     @yield('css')
 </head>
 <body class="home">

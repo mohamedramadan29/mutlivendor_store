@@ -1,6 +1,7 @@
 @extends('website.layouts.master')
+@section('title') الرئيسية   @endsection
 @section('content')
-    <div>
+    <div style="background-image: url('{{ asset('assets/website/images/background.png') }}');background-size: cover;background-position: center">
         <div class="fullwidth-template">
             <div class="home-slider fullwidth rows-space-60">
                 <div class="slider-owl owl-slick equal-container nav-center equal-container"
@@ -42,7 +43,7 @@
                                     <div class="product-thumb">
                                         <div class="thumb-inner">
                                             <a href="#">
-                                                <img src="{{$product['image']}}" alt="img">
+                                                <img src="{{Storage::url($product['image'])}}" alt="img">
                                             </a>
                                             <div class="thumb-group">
                                                 <div class="yith-wcwl-add-to-wishlist">
@@ -173,18 +174,18 @@
                                         <li class="product-item  col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1">
                                             <div class="product-inner equal-element">
                                                 <div class="product-top">
-                                                    <div class="flash">
-                                                <span class="onnew">
-                                                    <span class="text">
-                                                       جديد
-                                                    </span>
-                                                </span>
-                                                    </div>
+{{--                                                    <div class="flash">--}}
+{{--                                                <span class="onnew">--}}
+{{--                                                    <span class="text">--}}
+{{--                                                       جديد--}}
+{{--                                                    </span>--}}
+{{--                                                </span>--}}
+{{--                                                    </div>--}}
                                                 </div>
                                                 <div class="product-thumb">
                                                     <div class="thumb-inner">
                                                         <a href="#">
-                                                            <img src="{{$product['image']}}" alt="img">
+                                                            <img src="{{Storage::url($product['image'])}}" alt="img">
                                                         </a>
                                                         <div class="thumb-group">
                                                             <div class="yith-wcwl-add-to-wishlist">
@@ -250,18 +251,18 @@
                                         <li class="product-item  col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1">
                                             <div class="product-inner equal-element">
                                                 <div class="product-top">
-                                                    <div class="flash">
-                                                <span class="onnew">
-                                                    <span class="text">
-                                                       جديد
-                                                    </span>
-                                                </span>
-                                                    </div>
+{{--                                                    <div class="flash">--}}
+{{--                                                <span class="onnew">--}}
+{{--                                                    <span class="text">--}}
+{{--                                                       جديد--}}
+{{--                                                    </span>--}}
+{{--                                                </span>--}}
+{{--                                                    </div>--}}
                                                 </div>
                                                 <div class="product-thumb">
                                                     <div class="thumb-inner">
                                                         <a href="#">
-                                                            <img src="{{$product['image']}}" alt="img">
+                                                            <img src="{{Storage::url($product['image'])}}" alt="img">
                                                         </a>
                                                         <div class="thumb-group">
                                                             <div class="yith-wcwl-add-to-wishlist">
@@ -327,18 +328,18 @@
                                         <li class="product-item  col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1">
                                             <div class="product-inner equal-element">
                                                 <div class="product-top">
-                                                    <div class="flash">
-                                                <span class="onnew">
-                                                    <span class="text">
-                                                       جديد
-                                                    </span>
-                                                </span>
-                                                    </div>
+{{--                                                    <div class="flash">--}}
+{{--                                                <span class="onnew">--}}
+{{--                                                    <span class="text">--}}
+{{--                                                       جديد--}}
+{{--                                                    </span>--}}
+{{--                                                </span>--}}
+{{--                                                    </div>--}}
                                                 </div>
                                                 <div class="product-thumb">
                                                     <div class="thumb-inner">
                                                         <a href="#">
-                                                            <img src="{{$product['image']}}" alt="img">
+                                                            <img src="{{Storage::url($product['image'])}}" alt="img">
                                                         </a>
                                                         <div class="thumb-group">
                                                             <div class="yith-wcwl-add-to-wishlist">

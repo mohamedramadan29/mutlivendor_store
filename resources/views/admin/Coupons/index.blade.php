@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    فئات الاقسام الرئيسية للمتجر
+    كوبونات الخصم
 @endsection
 @section('css')
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>
@@ -15,8 +15,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الرئيسية </h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ فئات
-                    الاقسام الرئيسية للمتجر </span>
+                <h4 class="content-title mb-0 my-auto">الرئيسية </h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ كوبونات الخصم
+                      كوبونات الخصم  </span>
             </div>
         </div>
     </div>
@@ -28,7 +28,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <a href='{{ url('admin/add_category') }}' class="btn btn-primary"> أصافة فئة جديدة <i
+                    <a href='{{ url('admin/add_coupon') }}' class="btn btn-primary">  اضافه كوبون جديد  <i
                             class="fa fa-plus"></i>
                     </a>
                 </div>
@@ -54,11 +54,12 @@
                                 <thead>
                                 <tr>
                                     <th class="wd-15p border-bottom-0"> #</th>
-                                    <th class="wd-15p border-bottom-0"> اسم الفئة</th>
-                                    <th class="wd-15p border-bottom-0"> القسم</th>
-                                    <th class="wd-15p border-bottom-0"> الاب</th>
-                                    <th class="wd-15p border-bottom-0"> الصورة</th>
-                                    <th class="wd-15p border-bottom-0"> الحالة</th>
+                                    <th class="wd-15p border-bottom-0"> كود الخصم</th>
+                                    <th class="wd-15p border-bottom-0"> نوع الكود</th>
+                                    <th class="wd-15p border-bottom-0"> نوع الخصم</th>
+                                    <th class="wd-15p border-bottom-0"> قيمه الخصم</th>
+                                    <th class="wd-15p border-bottom-0"> تاريخ الانتهاء</th>
+                                    <th class="wd-15p border-bottom-0"> حاله الكود</th>
                                     <th class="wd-15p border-bottom-0"> العمليات</th>
                                 </tr>
                                 </thead>
@@ -66,44 +67,39 @@
                                 @php
                                     $i = 1;
                                 @endphp
-                                @foreach ($allcategories as $category)
+                                @foreach ($allcoupons as $coupon)
                                     <tr>
                                         <td> {{ $i++ }} </td>
                                         <td>
-                                            <a href='{{ url('admin/update_category',$category['id']) }}'>
-                                                {{ $category['name'] }}
+                                            <a href='{{ url('admin/update_coupon',$coupon['id']) }}'>
+                                                {{ $coupon['coupon_code'] }}
                                             </a>
                                         </td>
-                                        <td> {{ $category['section']['name'] }}  </td>
+                                        <td> {{ $coupon['coupon_type'] }}  </td>
+                                        <td> {{ $coupon['amount_type'] }}  </td>
+                                        <td> {{ $coupon['amount'] }}  </td>
+                                        <td> {{ $coupon['expire_date'] }}  </td>
                                         <td>
-                                            @if($category['parent_id'] == 0) <span class="badge badge-danger"> لا يوجد </span>
-                                            @elseif(isset($category['parentCategory']['name']) && $category['parentCategory']['name'] != 0)
-                                                <span> {{$category['parentCategory']['name']}} </span>
-                                            @endif
-                                             </td>
-                                        <td><img width="50px" class="img-thumbnail img-fluid"
-                                                 src="{{ Storage::url($category['image']) }}">
-                                        </td>
-                                        <td>
-                                            @if ($category['status'] == 1)
-                                                <span class="badge badge-success"> نشط </span>
-                                            @elseif($category['status'] == 0)
-                                                <span class="badge badge-danger"> غير نشط </span>
+                                            @if($coupon['status'] == 0) <span
+                                                class="badge badge-danger"> غير فعال </span>
+                                            @else
+                                                <span class="badge badge-danger">  فعال </span>
                                             @endif
                                         </td>
+
                                         <td>
-                                            <a href='{{ url('admin/update_category',$category['id']) }}'
+                                            <a href='{{ url('admin/update_coupon',$coupon['id']) }}'
                                                class="btn btn-primary btn-sm">
                                                 تعديل <i class="fa fa-edit"></i></a>
                                             </a>
-                                            <button data-target="#delete_model_{{ $category['id'] }}"
+                                            <button data-target="#delete_model_{{ $coupon['id'] }}"
                                                     data-toggle="modal" class="btn btn-danger btn-sm"> حذف <i
                                                     class="fa fa-trash"></i>
                                             </button>
 
                                         </td>
                                     </tr>
-                                    @include('admin.categories.delete')
+                                    @include('admin.Coupons.delete')
                                 @endforeach
                                 </tbody>
                             </table>

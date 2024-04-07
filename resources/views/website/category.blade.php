@@ -1,4 +1,5 @@
 @extends('website.layouts.master')
+@section('title')  {{$category_data['name']}}  @endsection
 @section('content')
 
 <div class="main-content main-content-product no-sidebar">
@@ -8,7 +9,7 @@
 				<div class="breadcrumb-trail breadcrumbs">
 					<ul class="trail-items breadcrumb">
 						<li class="trail-item trail-begin">
-							<a href="index-2.html">الرئيسيه </a>
+							<a href="{{url('/')}}">الرئيسيه </a>
 						</li>
 						<li class="trail-item trail-end active">
 							المتجر
@@ -54,8 +55,8 @@
                                     </div>
                                     <div class="product-thumb">
                                         <div class="thumb-inner">
-                                            <a href="#">
-                                                <img src="{{$product['image']}}" alt="img">
+                                            <a href=""{{url('product_details/'.$product['slug'])}}"">
+                                                <img src="{{Storage::url($product['image'])}}" alt="img">
                                             </a>
                                             <div class="thumb-group">
                                                 <div class="yith-wcwl-add-to-wishlist">
@@ -73,7 +74,7 @@
                                     </div>
                                     <div class="product-info">
                                         <h5 class="product-name product_title">
-                                            <a href="#">{{$product['name']}}</a>
+                                            <a href="{{url('product_details/'.$product['slug'])}}">{{$product['name']}}</a>
                                         </h5>
                                         <div class="group-info">
                                             <div class="stars-rating">

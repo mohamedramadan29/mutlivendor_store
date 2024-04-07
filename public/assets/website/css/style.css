@@ -12,7 +12,7 @@ body {
 }
 
 * {
-	--main-color: #E5BA5B;
+	--main-color: #f1c40f;
 }
 
 label {
@@ -5694,7 +5694,7 @@ ul.list-products {
 }
 
 .cart-form .shop_table thead {
-	display: none;
+	/*display: none;*/
 }
 
 .cart-form .shop_table thead>tr, .cart-form .shop_table tbody>tr.cart_item {
