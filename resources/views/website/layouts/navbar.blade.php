@@ -1,9 +1,7 @@
 <?php
 $categories = \App\Models\admin\Category::all();
 $sections = \App\Models\Admin\Section::with('categories')->get();
-//dd($sections);
 ?>
-
 <header class="header style7">
     <div class="top-bar">
         <div class="container">
@@ -40,175 +38,12 @@ $sections = \App\Models\Admin\Section::with('categories')->get();
                                     @endphp
                                 </span>
                             </a>
-                            {{--                            <div class="shopcart-description stelina-submenu">--}}
-                            {{--                                <div class="content-wrap">--}}
-                            {{--                                    <h3 class="title"> سلة المشتريات </h3>--}}
-                            {{--                                    <ul class="minicart-items">--}}
-                            {{--                                        <li class="product-cart mini_cart_item">--}}
-                            {{--                                            <a href="#" class="product-media">--}}
-                            {{--                                                <img src="{{asset('assets/website/images/item-minicart-1.jpg')}}"--}}
-                            {{--                                                     alt="img">--}}
-                            {{--                                            </a>--}}
-                            {{--                                            <div class="product-details">--}}
-                            {{--                                                <h5 class="product-name">--}}
-                            {{--                                                    <a href="#">Bibliotheque</a>--}}
-                            {{--                                                </h5>--}}
-                            {{--                                                <div class="variations">--}}
-                            {{--                                                    <span class="attribute_color">--}}
-                            {{--                                                        <a href="#">Black</a>--}}
-                            {{--                                                    </span>--}}
-                            {{--                                                    ,--}}
-                            {{--                                                    <span class="attribute_size">--}}
-                            {{--                                                        <a href="#">300ml</a>--}}
-                            {{--                                                    </span>--}}
-                            {{--                                                </div>--}}
-                            {{--                                                <span class="product-price">--}}
-                            {{--                                                    <span class="price">--}}
-                            {{--                                                        <span> ر.س 45</span>--}}
-                            {{--                                                    </span>--}}
-                            {{--                                                </span>--}}
-                            {{--                                                <span class="product-quantity">--}}
-                            {{--                                                    (x1)--}}
-                            {{--                                                </span>--}}
-                            {{--                                                <div class="product-remove">--}}
-                            {{--                                                    <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>--}}
-                            {{--                                                </div>--}}
-                            {{--                                            </div>--}}
-                            {{--                                        </li>--}}
-                            {{--                                        <li class="product-cart mini_cart_item">--}}
-                            {{--                                            <a href="#" class="product-media">--}}
-                            {{--                                                <img src="{{asset('assets/website/images/item-minicart-2.jpg')}}"--}}
-                            {{--                                                     alt="img">--}}
-                            {{--                                            </a>--}}
-                            {{--                                            <div class="product-details">--}}
-                            {{--                                                <h5 class="product-name">--}}
-                            {{--                                                    <a href="#">Soap Dining Solutions</a>--}}
-                            {{--                                                </h5>--}}
-                            {{--                                                <div class="variations">--}}
-                            {{--                                                    <span class="attribute_color">--}}
-                            {{--                                                        <a href="#">Black</a>--}}
-                            {{--                                                    </span>--}}
-                            {{--                                                    ,--}}
-                            {{--                                                    <span class="attribute_size">--}}
-                            {{--                                                        <a href="#">300ml</a>--}}
-                            {{--                                                    </span>--}}
-                            {{--                                                </div>--}}
-                            {{--                                                <span class="product-price">--}}
-                            {{--                                                    <span class="price">--}}
-                            {{--                                                        <span> ر.س 45</span>--}}
-                            {{--                                                    </span>--}}
-                            {{--                                                </span>--}}
-                            {{--                                                <span class="product-quantity">--}}
-                            {{--                                                    (x1)--}}
-                            {{--                                                </span>--}}
-                            {{--                                                <div class="product-remove">--}}
-                            {{--                                                    <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>--}}
-                            {{--                                                </div>--}}
-                            {{--                                            </div>--}}
-                            {{--                                        </li>--}}
-                            {{--                                        <li class="product-cart mini_cart_item">--}}
-                            {{--                                            <a href="#" class="product-media">--}}
-                            {{--                                                <img src="{{asset('assets/website/images/item-minicart-3.jpg')}}"--}}
-                            {{--                                                     alt="img">--}}
-                            {{--                                            </a>--}}
-                            {{--                                            <div class="product-details">--}}
-                            {{--                                                <h5 class="product-name">--}}
-                            {{--                                                    <a href="#">Dining Solutions Soap</a>--}}
-                            {{--                                                </h5>--}}
-                            {{--                                                <div class="variations">--}}
-                            {{--                                                    <span class="attribute_color">--}}
-                            {{--                                                        <a href="#">Black</a>--}}
-                            {{--                                                    </span>--}}
-                            {{--                                                    ,--}}
-                            {{--                                                    <span class="attribute_size">--}}
-                            {{--                                                        <a href="#">300ml</a>--}}
-                            {{--                                                    </span>--}}
-                            {{--                                                </div>--}}
-                            {{--                                                <span class="product-price">--}}
-                            {{--                                                    <span class="price">--}}
-                            {{--                                                        <span> ر.س 45</span>--}}
-                            {{--                                                    </span>--}}
-                            {{--                                                </span>--}}
-                            {{--                                                <span class="product-quantity">--}}
-                            {{--                                                    (x1)--}}
-                            {{--                                                </span>--}}
-                            {{--                                                <div class="product-remove">--}}
-                            {{--                                                    <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>--}}
-                            {{--                                                </div>--}}
-                            {{--                                            </div>--}}
-                            {{--                                        </li>--}}
-                            {{--                                    </ul>--}}
-                            {{--                                    <div class="subtotal">--}}
-                            {{--                                        <span class="total-title"> المجموع الفرعي : </span>--}}
-                            {{--                                        <span class="total-price">--}}
-                            {{--                                            <span class="Price-amount">--}}
-                            {{--                                                ر.س 135--}}
-                            {{--                                            </span>--}}
-                            {{--                                        </span>--}}
-                            {{--                                    </div>--}}
-                            {{--                                    <div class="actions">--}}
-                            {{--                                        <a class="button button-viewcart" href="{{url('cart/show')}}">--}}
-                            {{--                                            <span> مشاهده السله </span>--}}
-                            {{--                                        </a>--}}
-                            {{--                                        <a href="checkout.php" class="button button-checkout">--}}
-                            {{--                                            <span> اتمام الطلب </span>--}}
-                            {{--                                        </a>--}}
-                            {{--                                    </div>--}}
-                            {{--                                </div>--}}
-                            {{--                            </div>--}}
                         </div>
                         <div class="block-account block-header stelina-dropdown">
                             <a href="{{url('vendor/login_register')}}">
                                 <span class="flaticon-user"></span>
                             </a>
-                            {{--                            <div class="header-account stelina-submenu">--}}
-                            {{--                                <div class="header-user-form-tabs">--}}
-                            {{--                                    <ul class="tab-link">--}}
-                            {{--                                        <li class="active">--}}
-                            {{--                                            <a data-toggle="tab" aria-expanded="true" href="#header-tab-login"> تسجيل--}}
-                            {{--                                                دخول </a>--}}
-                            {{--                                        </li>--}}
-                            {{--                                        <li>--}}
-                            {{--                                            <a data-toggle="tab" aria-expanded="true" href="#header-tab-rigister"> حساب--}}
-                            {{--                                                جديد </a>--}}
-                            {{--                                        </li>--}}
-                            {{--                                    </ul>--}}
-                            {{--                                    <div class="tab-container">--}}
-                            {{--                                        <div id="header-tab-login" class="tab-panel active">--}}
-                            {{--                                            <form method="post" class="login form-login">--}}
-                            {{--                                                <p class="form-row form-row-wide">--}}
-                            {{--                                                    <input type="email" placeholder="البريد الالكتروني"--}}
-                            {{--                                                           class="input-text">--}}
-                            {{--                                                </p>--}}
-                            {{--                                                <p class="form-row form-row-wide">--}}
-                            {{--                                                    <input type="password" class="input-text" placeholder="كلمه المرور">--}}
-                            {{--                                                </p>--}}
-                            {{--                                                <p class="form-row">--}}
 
-                            {{--                                                    <input type="submit" class="button" value="تسجيل دخول ">--}}
-                            {{--                                                </p>--}}
-                            {{--                                                <p class="lost_password">--}}
-                            {{--                                                    <a href="#"> نسيت كلمه المرور ؟</a>--}}
-                            {{--                                                </p>--}}
-                            {{--                                            </form>--}}
-                            {{--                                        </div>--}}
-                            {{--                                        <div id="header-tab-rigister" class="tab-panel">--}}
-                            {{--                                            <form method="post" class="register form-register">--}}
-                            {{--                                                <p class="form-row form-row-wide">--}}
-                            {{--                                                    <input type="email" placeholder="البريد الالكتروني"--}}
-                            {{--                                                           class="input-text">--}}
-                            {{--                                                </p>--}}
-                            {{--                                                <p class="form-row form-row-wide">--}}
-                            {{--                                                    <input type="password" class="input-text" placeholder="كلمه المرور">--}}
-                            {{--                                                </p>--}}
-                            {{--                                                <p class="form-row">--}}
-                            {{--                                                    <input type="submit" class="button" value="حساب جديد">--}}
-                            {{--                                                </p>--}}
-                            {{--                                            </form>--}}
-                            {{--                                        </div>--}}
-                            {{--                                    </div>--}}
-                            {{--                                </div>--}}
-                            {{--                            </div>--}}
                         </div>
                         <a class="menu-bar mobile-navigation menu-toggle" href="#">
                             <span></span>
@@ -219,10 +54,10 @@ $sections = \App\Models\Admin\Section::with('categories')->get();
                 </div>
                 <div class="col-lg-7 col-sm-8 col-md-6 col-xs-5 col-ts-12">
                     <div class="block-search-block">
-                        <form class="form-search form-search-width-category">
+                        <form class="form-search form-search-width-category" method="get" action="{{url('search-products')}}">
                             <div class="form-content">
                                 <div class="inner">
-                                    <input type="text" class="input" name="s" value="" placeholder=" بحث ">
+                                    <input type="text" class="input" name="search" value="" placeholder=" بحث ">
                                 </div>
                                 <button class="btn-search" type="submit">
                                     <span class="icon-search"></span>

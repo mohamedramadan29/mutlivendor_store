@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
+use App\Models\Admin\OrderLogs;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\OrderStatus;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -37,7 +39,8 @@ class OrdersController extends Controller
     {
         $order_details = Order::with('order_products')->where('id', $id)->first();
         $order_statuss = OrderStatus::where('status', 1)->get();
-        return view('admin.orders.order_details', compact('order_details', 'order_statuss'));
+        $order_logs = OrderLogs::where('order_id',$id)->get();
+        return view('admin.orders.order_details', compact('order_details', 'order_statuss','order_logs'));
     }
 
     // Update Order Status
@@ -46,6 +49,11 @@ class OrdersController extends Controller
         try {
             $status_data = $request->all();
             Order::where('id', $status_data['order_id'])->update(['order_status' => $status_data['order_status']]);
+            // Insert Into Order Logs
+            $log = new OrderLogs();
+            $log->order_id = $status_data['order_id'];
+            $log->order_status = $status_data['order_status'];
+            $log->save();
             // Send Order New Status To Email
 
             // get the order delievery details
@@ -103,5 +111,12 @@ class OrdersController extends Controller
         } catch (\Exception $e) {
             return $this->exception_message($e);
         }
+    }
+
+    public function order_invoice($id)
+    {
+        $order_details = Order::with('order_products')->where('id',$id)->first();
+        $user = \App\Models\User::where('id',$order_details['user_id'])->first();
+        return view('admin.orders.invoice',compact('order_details','user'));
     }
 }

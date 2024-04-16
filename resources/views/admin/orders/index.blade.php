@@ -92,6 +92,8 @@
                                             <td>
                                                 <a href="{{url("admin/orders/order_details/".$order['id'])}}"
                                                    class="btn btn-primary btn-sm"> تفاصيل واداره الطلب </a>
+                                                <a href="{{url("admin/orders/invoice/".$order['id'])}}"
+                                                   class="btn btn-warning btn-sm"> فاتورة الطلب   </a>
                                             </td>
                                         </tr>
                                     @endif

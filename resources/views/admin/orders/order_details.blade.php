@@ -302,9 +302,29 @@
                                 </tbody>
                             </table>
                         </div>
-
-
                     </div>
+                        <div class="mb-4 main-content-label"> سلسلة حالات الطلب   </div>
+                        <div class="row">
+                            <table class="table-bordered table">
+                                <thead>
+                                <tr>
+                                    <th> حالة الطلب  </th>
+                                    <th> تاريخ تغير الحالة  </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                @foreach($order_logs as $log)
+                                    <tr>
+                                        <td> {{$log['order_status']}} </td>
+                                        <td>  {{$log['created_at']}} </td>
+                                    </tr>
+
+                                @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
                     {{--                    <form class="form-horizontal" method="post" action="{{url('admin/admin/view_vendor_details/'.$vendor_data_in_admin['vendor_id'])}}" enctype="multipart/form-data">--}}
                     {{--                        @csrf--}}
                     {{--                        <div class="form-group ">--}}

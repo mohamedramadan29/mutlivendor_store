@@ -93,6 +93,17 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label class="form-label"> الأسم  [en]</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input required type="text" class="form-control" name="name_en" value="{{$product['name_en']}}">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-md-3">
@@ -124,6 +135,8 @@
                                             <input type="file" class="form-control" name="image"
                                                    accept="image/*">
                                             <img class="img-thumbnail img-fluid" width="80px" src="{{\Illuminate\Support\Facades\Storage::url($product['image'])}}">
+
+{{--                                            <img class="img-thumbnail img-fluid" width="80px" src="{{ asset('public/'.Storage::url($product['image'])) }}">--}}
                                         </div>
 
                                     </div>
@@ -160,6 +173,17 @@
                                         </div>
                                         <div class="col-md-9">
                                             <textarea required class='form-control' name='description'>{{$product['description']}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label class="form-label"> [en] وصف المنتج </label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <textarea required class='form-control' name='description_en'>{{$product['description_en']}}</textarea>
                                         </div>
                                     </div>
                                 </div>

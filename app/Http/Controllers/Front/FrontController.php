@@ -26,7 +26,8 @@ class FrontController extends Controller
         $feature_products = Product::where(['is_feature' => 1, 'status' => 1])->inRandomOrder()->limit(8)->get();
         $offer_products = Product::where('discount', '>', 0)->where('status', 1)->inRandomOrder()->limit(8)->get();
 //        dd($new_products);
-        return view('website.index', compact('banners', 'new_products', 'best_seller', 'offer_products', 'feature_products'));
+      //  return view('website.index', compact('banners', 'new_products', 'best_seller', 'offer_products', 'feature_products'));
+    return view('welcome');
     }
 
     public function shop_page()

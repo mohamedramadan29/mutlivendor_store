@@ -312,29 +312,54 @@
                                 </div>
                             </div>
 
+
+                            <div class="mb-4 main-content-label"> معلومات العمولة الخاصة بالتاجر</div>
+
+                            <form method="post" action="{{url('admin/update_vendor_commission')}}">
+                                @csrf
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label class="form-label"> نسبة التاجر لكل عنصر مباع  [%]</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="hidden" name="vendor_id" value="{{$vendor_person_data['id']}}">
+                                            <input type="text" class="form-control" name="commission"
+                                                   value="{{$vendor_person_data['commission']}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-sm" type="submit"> تعديل النسبة <i class="fa fa-edit"></i> </button>
+                            </form>
                         </div>
 
                     </div>
-                    <form class="form-horizontal" method="post" action="{{url('admin/admin/view_vendor_details/'.$vendor_data_in_admin['vendor_id'])}}" enctype="multipart/form-data">
+                    <form class="form-horizontal" method="post"
+                          action="{{url('admin/admin/view_vendor_details/'.$vendor_data_in_admin['vendor_id'])}}"
+                          enctype="multipart/form-data">
                         @csrf
                         <div class="form-group ">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label class="form-label">  تعديل حالة التاجر </label>
+                                    <label class="form-label"> تعديل حالة التاجر </label>
                                 </div>
                                 <div class="col-md-9">
                                     <select class="form-control select2" name="person_status">
-                                        <option> -- حدد حالة التاجر  -- </option>
-                                        <option @if($vendor_data_in_admin['status'] ==1) selected @endif value="1"> فعال </option>
-                                        <option @if($vendor_data_in_admin['status'] ==0) selected @endif value="0">غير  فعال </option>
+                                        <option> -- حدد حالة التاجر --</option>
+                                        <option @if($vendor_data_in_admin['status'] ==1) selected @endif value="1">
+                                            فعال
+                                        </option>
+                                        <option @if($vendor_data_in_admin['status'] ==0) selected @endif value="0">غير
+                                            فعال
+                                        </option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                    <div class="card-footer text-left">
-                        <button type="submit" class="btn btn-primary waves-effect waves-light">تعديل البيانات
-                        </button>
-                    </div>
+                        <div class="card-footer text-left">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">تعديل البيانات
+                            </button>
+                        </div>
                     </form>
                 </div>
 

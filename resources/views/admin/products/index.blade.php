@@ -31,6 +31,13 @@
                     <a href='{{ url('admin/product/add') }}' class="btn btn-primary"> اضافة منتج جديد <i
                             class="fa fa-plus"></i>
                     </a>
+
+{{--                    <a href='{{ url('admin/products/export') }}' class="btn btn-warning"> تصدير المنتجات   <i--}}
+{{--                            class="fa fa-file"></i>--}}
+{{--                    </a>--}}
+                    <a href='{{ url('admin/products/import') }}' class="btn btn-warning"> استيراد المنتجات  <i
+                            class="fa fa-file"></i>
+                    </a>
                 </div>
 
                 <div class="card-body">
@@ -54,8 +61,8 @@
                                 <tr>
                                     <th class="wd-15p border-bottom-0"> #</th>
                                     <th class="wd-15p border-bottom-0"> الاسم</th>
-                                    <th class="wd-15p border-bottom-0"> القسم</th>
-                                    <th class="wd-15p border-bottom-0"> الفئة</th>
+{{--                                    <th class="wd-15p border-bottom-0"> القسم</th>--}}
+{{--                                    <th class="wd-15p border-bottom-0"> الفئة</th>--}}
                                     <th class="wd-15p border-bottom-0"> الكود</th>
                                     <th class="wd-15p border-bottom-0"> مالك المنتج</th>
                                     <th class="wd-15p border-bottom-0"> الصوره</th>
@@ -75,8 +82,8 @@
                                                 {{ $product['name'] }}
                                             </a>
                                         </td>
-                                        <td> {{ $product['section']['name'] }}  </td>
-                                        <td> {{ $product['category']['name'] }}  </td>
+{{--                                        <td> {{ $product['section']['name'] }}  </td>--}}
+{{--                                        <td> {{ $product['category']['name'] }}  </td>--}}
                                         <td> {{ $product['code'] }}  </td>
                                         <td>
                                             @if($product['admin_type'] == 'vendor')
@@ -89,6 +96,8 @@
 
                                         <td><img width="50px" class="img-thumbnail img-fluid"
                                                  src="{{ Storage::url($product['image']) }}">
+
+{{--                                            <img class="img-thumbnail img-fluid" width="50px" src="{{ asset('public/'.Storage::url($product['image'])) }}">--}}
                                         </td>
                                         <td>
                                             @if ($product['status'] == 1)

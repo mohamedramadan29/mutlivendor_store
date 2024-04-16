@@ -21,7 +21,7 @@ $(function(e) {
 		}
 	});
 	$('#example2').DataTable({
-		responsive: true,
+		//responsive: true,
 		language: {
 			searchPlaceholder: 'Search...',
 			sSearch: '',

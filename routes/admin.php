@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\UserController;
 use \App\Http\Controllers\Admin\OrdersController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::group(['prefix' => 'admin'], function () {
     // Admin Login
     Route::match(['post', 'get'], '/', [AdminController::class, 'login'])->name('admin_login');
@@ -36,6 +37,8 @@ Route::group(['prefix' => 'admin'], function () {
         ////// View Vendor Details
         Route::match(['post', 'get'], 'admin/view_vendor_details/{id}', [VendorController::class, 'view_vendor_details']);
 
+        //////// Update Vendor commission
+        Route::post('update_vendor_commission',[VendorController::class,'update_vendor_commission']);
         // Admin Logout
         Route::get('logout', [AdminController::class, 'logout'])->name('admin_logout');
 
@@ -73,6 +76,14 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::post('product/delete/{id}',[ProductController::class,'delete']);
 
+        // Import Product From Excel File
+      //  Route::post('products/import',[ProductController::class,'import_data']);
+        Route::match(['post','get'],'products/import',[ProductController::class,'import_data']);
+
+        // Make Export Product
+
+        Route::get('products/export',[ProductController::class,'export_data']);
+
         // START PRODUCT IMAGES
 
         Route::match(['post','get'],'product/add-images/{id}',[ProductController::class,'add_images']);
@@ -103,6 +114,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::match(['post','get'],'orders/order_details/{id}',[OrdersController::class,'order_details']);
 
+        Route::get('orders/invoice/{id}',[OrdersController::class,'order_invoice']);
         // Update Order Status
         Route::post('update_order_status',[OrdersController::class,'update_order_status']);
         // Update Item  Status

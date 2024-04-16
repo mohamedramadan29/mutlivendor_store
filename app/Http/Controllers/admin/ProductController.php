@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Exports\ProductExport;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
 use App\Http\Traits\Slug_Trait;
+use App\Imports\ProductImport;
 use App\Models\Admin\Brand;
 use App\Models\admin\Category;
 use App\Models\admin\Product;
@@ -14,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -23,14 +26,14 @@ class ProductController extends Controller
     public function index()
     {
         $allproduct = Product::with('section', 'category', 'brand');
-        if (Auth::guard('admin')->user()->type == 'vendor'){
-            if(Auth::guard('admin')->user()->status != 1){
+        if (Auth::guard('admin')->user()->type == 'vendor') {
+            if (Auth::guard('admin')->user()->status != 1) {
 
-                 return redirect('admin/update_vendor/personal')->withErrors('من فضلك اكمل جميع البيانات الخاصه بك  اولا [المعلومات الشخصيه ، بيانات الموقع ، بيانات البنك  ]  وانتظر التفعيل من الاداره ');
+                return redirect('admin/update_vendor/personal')->withErrors('من فضلك اكمل جميع البيانات الخاصه بك  اولا [المعلومات الشخصيه ، بيانات الموقع ، بيانات البنك  ]  وانتظر التفعيل من الاداره ');
             }
-            $allproduct = $allproduct->where('vendor_id',Auth::guard('admin')->user()->vendor_id);
+            $allproduct = $allproduct->where('vendor_id', Auth::guard('admin')->user()->vendor_id);
             $allproduct = $allproduct->get();
-        }else{
+        } else {
             $allproduct = $allproduct->get();
         }
         return view('admin.products.index', compact('allproduct'));
@@ -102,12 +105,14 @@ class ProductController extends Controller
                 $product->vendor_id = $vendor_id;
                 $product->admin_type = $user_type;
                 $product->name = $productdata['name'];
+                $product->name_en = $productdata['name_en'];
                 $product->slug = $this->CustomeSlug($productdata['name']);
                 $product->price = $productdata['price'];
                 $product->code = $productdata['code'];
                 $product->discount = $productdata['discount'];
                 $product->weight = $productdata['weight'];
                 $product->description = $productdata['description'];
+                $product->description_en = $productdata['description_en'];
                 $product->status = $productdata['status'];
                 $product->is_feature = $productdata['is_feature'];
                 $product->best_seller = $productdata['best_seller'];
@@ -123,7 +128,7 @@ class ProductController extends Controller
         }
 
 
-        return view('admin.products.add', compact('allbrands', 'categories', 'allcategory', 'allsections','user_type'));
+        return view('admin.products.add', compact('allbrands', 'categories', 'allcategory', 'allsections', 'user_type'));
     }
 
     public function update($id, Request $request)
@@ -196,15 +201,17 @@ class ProductController extends Controller
                     "vendor_id" => $vendor_id,
                     "admin_type" => $user_type,
                     "name" => $productdata['name'],
-                    'slug'=>  $this->CustomeSlug($productdata['name']),
+                    "name_en" => $productdata['name_en'],
+                    'slug' => $this->CustomeSlug($productdata['name']),
                     "price" => $productdata['price'],
                     "code" => $productdata['code'],
                     "discount" => $productdata['discount'],
                     "weight" => $productdata['weight'],
                     "description" => $productdata['description'],
+                    "description_en" => $productdata['description_en'],
                     "status" => $productdata['status'],
                     "is_feature" => $productdata['is_feature'],
-                    'best_seller'=>$productdata['best_seller'],
+                    'best_seller' => $productdata['best_seller'],
                     "meta_title" => $productdata['meta_title'],
                     "meta_description" => $productdata['meta_description'],
                     "meta_keywords" => $productdata['meta_keywords'],
@@ -216,7 +223,7 @@ class ProductController extends Controller
             return $this->exception_message($e);
         }
 
-        return view('admin.products.edit', compact('product', 'categories', 'allbrands', 'allcategory', 'allsections','user_type'));
+        return view('admin.products.edit', compact('product', 'categories', 'allbrands', 'allcategory', 'allsections', 'user_type'));
     }
 
 // Function To Insert More Images
@@ -252,6 +259,7 @@ class ProductController extends Controller
 
         return view('admin.products.images.add_new_images', compact('product'));
     }
+
     //delete image from Product gallary
     public function delete_image($id)
     {
@@ -262,8 +270,7 @@ class ProductController extends Controller
             }
             $productImage->delete();
             return $this->success_message('تم حذف المنتج بنجاح');
-        }
-        catch (\Exception $e){
+        } catch (\Exception $e) {
             return $this->exception_message($e);
         }
 
@@ -276,12 +283,34 @@ class ProductController extends Controller
         try {
             $product = Product::findOrFail($id);
 
-
             $product->delete();
             return $this->success_message('تم حذف المنتج بنجاح');
 
         } catch (\Exception $e) {
             return $this->exception_message($e);
         }
+    }
+
+    // Import Excel Product Data
+
+    public function import_data(Request $request)
+    {
+        if ($request->isMethod('post')) {
+           // return ($request->file('file')->path());
+            //Excel::import(new ProductImport, $request->file('file')->path());
+          //  Excel::import(new ProductImport(), $request->file('file')->path(), 'xlsx');
+            Excel::import(new ProductImport(), public_path('storage/pro3.xlsx'));
+
+            //  return $this->success_message('تم الاسترداد بنجاح');
+        }
+
+        return view('admin.products.import_products');
+
+    }
+
+    public function export_data()
+    {
+        return Excel::download(new ProductExport(), 'products.xlsx');
+
     }
 }

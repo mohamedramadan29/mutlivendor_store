@@ -8,6 +8,7 @@ use App\Models\admin\Category;
 use App\Models\Admin\Coupon;
 use App\Models\admin\Product;
 use App\Models\Cart;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -129,6 +130,14 @@ class ProductController extends Controller
                 if ($coupondata['expire_date'] < $current_date) {
                     $message = ['لقد انتهي وقت هذا الكود '];
                 }
+                // Check If This Coupon Single Time
+                if ($coupondata->coupon_type == 'one') {
+                    // Check In Order Table if Coupon already Availed By User
+                    $couponCount = Order::where(['coupon_code' => $coupondata['coupon_code'], 'user_id' => Auth::user()->id])->count();
+                    if ($couponCount >= 1) {
+                        $message = ' تم استخدام هذا الكود بالفعل من قبل !  ';
+                    }
+                }
 
                 // Check If this Coupon in selected Categories Or Not All Product
                 if ($coupondata['categories'] != 'all') {
@@ -176,13 +185,13 @@ class ProductController extends Controller
                         } else {
                             $sub_total = $item['productdata']['price'] * $item['quantity'];
                         }
-                        $total_amount = $total_amount+$sub_total;
+                        $total_amount = $total_amount + $sub_total;
                     }
                     // Check If The Coupon Type Is Fixed Or Percentage
 
-                    if($coupondata['amount_type'] == 'fixed'){
+                    if ($coupondata['amount_type'] == 'fixed') {
                         $couponamount = $coupondata['amount'];
-                    }else{
+                    } else {
                         $couponamount = $total_amount * ($coupondata['amount'] / 100);
                     }
 
@@ -190,15 +199,15 @@ class ProductController extends Controller
 
                     // Add Coupon Code And Amount In Session
 
-                    Session::put('coupon_code',$data['code']);
-                    Session::put('coupon_amount',$couponamount);
+                    Session::put('coupon_code', $data['code']);
+                    Session::put('coupon_amount', $couponamount);
                     $message = 'تم تطبيق الكوبون بنجاح ';
                     return response()->json([
                         'status' => true,
-                        'coupon_amount'=>$couponamount,
-                        'grand_total'=>$grand_total,
+                        'coupon_amount' => $couponamount,
+                        'grand_total' => $grand_total,
                         'message' => $message,
-                        'View' => (string)View::make('website.cart_items')->with(compact('cartItems', 'item_counts','couponamount','grand_total')),
+                        'View' => (string)View::make('website.cart_items')->with(compact('cartItems', 'item_counts', 'couponamount', 'grand_total')),
                     ]);
                 }
 
@@ -210,5 +219,15 @@ class ProductController extends Controller
                 ]);
             }
         }
+    }
+
+    // Search Products
+    public function searchProduct(Request $request)
+    {
+        $searchTerm = $request->input('search');
+        // استعلام للبحث عن المنتجات التي تحتوي على السلسلة المماثلة لـ $searchTerm في اسمها
+        // للحفاظ علي كلمة search في ال url
+        $products = Product::where('name', 'like', '%' . $searchTerm . '%')->paginate(12)->withQueryString();
+        return view('website.search',compact('products'));
     }
 }

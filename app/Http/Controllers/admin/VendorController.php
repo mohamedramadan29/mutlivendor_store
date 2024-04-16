@@ -311,7 +311,21 @@ class VendorController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
-
-
     }
+   public function update_vendor_commission(Request $request)
+   {
+       try {
+           $commision_data = $request->all();
+           $vendor = Vendor::where('id',$commision_data['vendor_id'])->first();
+           $vendor->update([
+               'commission'=>$commision_data['commission'],
+           ]);
+           return $this->success_message('تم تحديث العمولة بنجاح');
+       }catch (\Exception $e){
+           return $this->exception_message($e);
+       }
+
+
+
+   }
 }
