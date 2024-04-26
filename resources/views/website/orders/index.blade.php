@@ -48,6 +48,7 @@
                             <td> {{ $order['grand_total']  }} <span> ر.س </span></td>
                             <td> {{$order['created_at']}} </td>
                             <td> <a class="btn btn-primary btn-sm " href="{{url('orders/index/'.$order['id'])}}"> <i class="fa fa-eye"></i> تفاصيل الطلب  </a> </td>
+
                         </tr>
                     @endforeach
                     </tbody>

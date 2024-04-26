@@ -14,11 +14,11 @@ class OrderController extends Controller
         if(empty($id)){
             $orders = Order::with('order_products')->where('user_id',Auth::user()->id)->orderby('id','desc')->get();
             // dd($orders);
-            return view('website.orders.index',compact('orders'));
+            return view('new_website.orders.index',compact('orders'));
         }else{
             $order_details = Order::with('order_products')->where("id",$id)->where('user_id',Auth::user()->id)->first();
 
-            return view('website.orders.order_details',compact('order_details'));
+            return view('new_website.orders.order_details',compact('order_details'));
         }
 
     }

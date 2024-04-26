@@ -9,6 +9,7 @@ use App\Models\Admin\Coupon;
 use App\Models\admin\Product;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\ProductReviews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -22,10 +23,12 @@ class ProductController extends Controller
     public function product_details($slug)
     {
         $product = Product::with(['productImages', 'vendor'])->where('slug', $slug)->first();
+        $product_id = $product['id'];
+        $product_reviews = ProductReviews::where('product_id',$product_id)->get();
         //dd($product);
         $category_data = Category::where('id', $product['category_id'])->first();
         $similarProducts = Product::where(['category_id' => $category_data['id'], 'status' => 1])->where('id', '!=', $product['id'])->orderBy('id', 'Desc')->limit(6)->get();
-        return view('website.product_details', compact('product', 'category_data', 'similarProducts'));
+        return view('new_website.product_details', compact('product', 'category_data', 'similarProducts','product_reviews'));
     }
 
     ///////// Add To Cart
@@ -71,7 +74,7 @@ class ProductController extends Controller
         $cartItems = Cart::getcartitems();
         $item_counts = $cartItems->count();
         // dd($cartItems);
-        return view('website.shopping_cart', compact('cartItems', 'item_counts'));
+        return view('new_website.shopping_cart', compact('cartItems', 'item_counts'));
     }
 
     // Update Cart Item Qunatity
@@ -228,6 +231,33 @@ class ProductController extends Controller
         // استعلام للبحث عن المنتجات التي تحتوي على السلسلة المماثلة لـ $searchTerm في اسمها
         // للحفاظ علي كلمة search في ال url
         $products = Product::where('name', 'like', '%' . $searchTerm . '%')->paginate(12)->withQueryString();
-        return view('website.search',compact('products'));
+        return view('new_website.search',compact('products'));
+    }
+
+    // Product Review
+    public function product_review(Request $request)
+    {
+        $alldata = $request->all();
+
+        $rules = [
+            'product_id' => 'required',
+            'name' => 'required|regex:/^[\pL\s\-]+$/u',
+            'product_review' => 'required',
+        ];
+        $customeMessage = [
+            'product_id.required' => 'من فضلك حدد المنتج ',
+            'name.required' => ' من فضلك ادخل الاسم ',
+            'product_review.required' => ' من فضلك ادخل التقيم   ',
+        ];
+        $this->validate($request, $rules, $customeMessage);
+
+        $review = new ProductReviews();
+        $review->product_id = $alldata['product_id'];
+        $review->name = $alldata['name'];
+        $review->email = $alldata['email'];
+        $review->comment = $alldata['product_review'];
+        $review->star_rating = $alldata['input_rating'];
+        $review->save();
+        return redirect()->back();
     }
 }

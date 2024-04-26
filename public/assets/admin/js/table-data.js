@@ -22,6 +22,7 @@ $(function(e) {
 	});
 	$('#example2').DataTable({
 		//responsive: true,
+        pageLength: 100,
 		language: {
 			searchPlaceholder: 'Search...',
 			sSearch: '',

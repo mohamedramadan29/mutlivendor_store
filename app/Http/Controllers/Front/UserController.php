@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function login_register()
     {
-        return view('website.users.user_login');
+        return view('new_website.users.user_login');
 
     }
 
@@ -33,19 +33,16 @@ class UserController extends Controller
         Db::beginTransaction();
         try {
             $all_data = $request->all();
+            // dd($all_data);
             $rules = [
                 'name' => 'required',
                 'email' => 'required|email|unique:users|max:150',
                 'mobile' => 'required|unique:users|numeric|min:10',
-                'accept' => 'required',
+//                'accept' => 'required',
                 'password' => [
                     'required',
                     'string',
                     'min:8',
-//                    'regex:/[a-z]/', // must contain at least one lowercase letter
-//                    'regex:/[A-Z]/', // must contain at least one uppercase letter
-//                    'regex:/[0-9]/', // must contain at least one digit
-//                    'regex:/[!@#$%^&*()_+\-=\[\]{};:\'"\\|,.<>\/?]/', // must contain a special character
                 ],
             ];
             $customeMessage = [
@@ -60,7 +57,7 @@ class UserController extends Controller
                 'password.required' => 'من فضلك ادخل رقم الهاتف',
                 'password.min' => 'كلمه المرور يجب ان تكون اكثر من ٨ احرف  ',
                 'password.regex' => 'كلمه المرور يجب ان تكون اكثر من ٨ احرف  ',
-                'accept.required' => 'يجب الموافقه علي الشروط والاحكام ',
+//                'accept.required' => 'يجب الموافقه علي الشروط والاحكام ',
             ];
             $validator = Validator::make($all_data, $rules, $customeMessage);
             if ($validator->fails()) {
@@ -77,28 +74,7 @@ class UserController extends Controller
             $user->status = 0;
             $user->save();
 
-            // Send Welcome Mail To User Registeration
-//            $email = $all_data['email'];
-//            $MessageDate = [
-//                'name' => $all_data['name'],
-//                "email" => $all_data['email'],
-//                'mobile' => $all_data['mobile']
-//            ];
-//            Mail::send('emails.UserRegister', $MessageDate, function ($message) use ($email) {
-//                $message->to($email)->subject(' شكرا لتسجيلك معنا في العطور  ');
-//            });
-//            DB::commit();
-//            if (Auth::attempt(['email' => $all_data['email'], 'password' => $all_data['password']])) {
-//                // Update User Cart Put User Id
-//                if (!empty(Session::get('session_id'))) {
-//                    $user_id = Auth::user()->id;
-//                    $session_id = Session::get('session_id');
-//                    Cart::where('session_id', $session_id)->update([
-//                        'user_id' => $user_id
-//                    ]);
-//                }
-//                return \redirect('user/profile');
-//            }
+
             // Send Activation Email To User
             $email = $all_data['email'];
 
@@ -159,55 +135,10 @@ class UserController extends Controller
             } catch (\Exception $e) {
                 return $this->exception_message($e);
             }
-
         }
+        return view('new_website.users.user_login');
     }
 
-    public function user_profile(Request $request)
-    {
-        if($request->isMethod('post')){
-            $new_data = $request->all();
-            $userData = User::where('email',Auth::user()->email)->first();
-            $user_id = $userData['id'];
-            $rules = [
-                'name'=>'required',
-                'mobile'=>'required|max:12|unique:users,mobile,'.$user_id,
-                'address'=>'required',
-                'city'=>'required',
-                'country'=>'required',
-                'state'=>'required',
-                'pincode'=>'required'
-
-            ];
-            $customeMessage = [
-                'name.required'=>'من فضلك ادخل الاسم ',
-                'mobile.required'=>' من فضلك ادخل رقم الهاتف  ',
-                'mobile.max'=>'رقم الهاتف يجب الا يتجاوز   12 رقم ',
-                'mobile.unique'=>' رقم الهاتف متواجد من قبل  ',
-                'address.required'=>'من فضلك ادخل العنوان الخاص بك ',
-                'city.required'=>'من فضلك ادخل المدينه ',
-                'country.required'=>'من فضلك ادخل الدوله ',
-                'country.state'=>'من فضلك ادخل الولايه ',
-                'country.pincode'=>'من فضلك ادخل الرمز البريدي',
-            ];
-           $this->validate($request,$rules,$customeMessage);
-//            if($validator->fails()){
-//                return Redirect::back()->withInput()->withErrors($validator);
-//            }
-            $userData->update([
-                'name'=>$new_data['name'],
-                'address'=>$new_data['address'],
-                'city'=>$new_data['city'],
-                'state'=>$new_data['state'],
-                'country'=>$new_data['country'],
-                'pincode'=>$new_data['pincode'],
-                'mobile'=>$new_data['mobile'],
-            ]);
-            return $this->success_message('تم تعديل بياناتك بنجاح ');
-
-        }
-        return view('website.users.profile');
-    }
 
     // Active User Email
     public function UserConfirm($email)
@@ -241,19 +172,19 @@ class UserController extends Controller
 
         if ($request->isMethod('post')) {
             $rules = [
-                'old_password'=>'required',
-                'new_password'=>'required|min:8',
-                'confirm_password'=>'required|same:new_password'
+                'old_password' => 'required',
+                'new_password' => 'required|min:8',
+                'confirm_password' => 'required|same:new_password'
             ];
             $customeMessage = [
-                'old_password.required'=>'من فضلك ادخل كلمه المرور',
-                'new_password.required'=>'من فضلك ادخل كلمه المرور الجديده',
-                'new_password.min'=>'كلمه المرور يجب ان تكون اكبر من او تساوي 8 ارقام وحروف',
-                'confirm_password.required'=>' يجب تاكيد كلمه المرور  ',
-                'confirm_password.same'=>'يجب تاكيد كلمه المرور بشكل صحيح',
+                'old_password.required' => 'من فضلك ادخل كلمه المرور',
+                'new_password.required' => 'من فضلك ادخل كلمه المرور الجديده',
+                'new_password.min' => 'كلمه المرور يجب ان تكون اكبر من او تساوي 8 ارقام وحروف',
+                'confirm_password.required' => ' يجب تاكيد كلمه المرور  ',
+                'confirm_password.same' => 'يجب تاكيد كلمه المرور بشكل صحيح',
                 //'new_password.confirmed'=>'يجب تاكيد كلمه المرور بشكل صحيح'
             ];
-            $this->validate($request,$rules,$customeMessage);
+            $this->validate($request, $rules, $customeMessage);
 
             // Check if the user is authenticated
             if (Auth::check()) {
@@ -264,7 +195,7 @@ class UserController extends Controller
                     // Update the password
                     $user->password = Hash::make($request->new_password);
                     $user->save();
-                   return $this->success_message('تم تعديل كلمه المرور بنجاح');
+                    return $this->success_message('تم تعديل كلمه المرور بنجاح');
                 } else {
                     return Redirect::back()->withInput()->withErrors('كلمة المرور القديمة غير صحيحة');
                 }
@@ -273,43 +204,42 @@ class UserController extends Controller
             }
         }
 
-        return view('website.users.profile');
+        return view('new_website.users.profile');
 
     }
-
 
 
     // Forget Password
 
     public function forgetPassword(Request $request)
     {
-        if($request->isMethod('post')){
+        if ($request->isMethod('post')) {
             $alldata = $request->all();
-           // dd($alldata);
+            // dd($alldata);
             $rules = [
                 'email' => 'required|email|exists:users',
             ];
             $customMessage = [
                 'email.required' => 'من فضلك ادخل البريد الإلكتروني',
                 'email.email' => 'من فضلك ادخل بريد الكتوني صحيح',
-                'email.exists'=>'لم يتم تسجيل عنوان البريد الالكتروني من قبل ',
+                'email.exists' => 'لم يتم تسجيل عنوان البريد الالكتروني من قبل ',
             ];
             $validator = Validator::make($alldata, $rules, $customMessage);
-            if($validator->passes()){
-                $user_details = User::where('email',$alldata['email'])->first();
+            if ($validator->passes()) {
+                $user_details = User::where('email', $alldata['email'])->first();
                 // Generate New Password
                 $new_password = Str::random(8);
                 // Update Password To USer
                 DB::beginTransaction();
-               User::where('email',$alldata['email'])->update(['password'=> Hash::make($new_password)]);
-               // Send Mail To User With New Password
+                User::where('email', $alldata['email'])->update(['password' => Hash::make($new_password)]);
+                // Send Mail To User With New Password
                 // get the user data
-                $userdata = User::where('email',$alldata['email'])->first();
+                $userdata = User::where('email', $alldata['email'])->first();
                 $email = $userdata['email'];
                 $MessageDate = [
-                    'name'=>$userdata['name'],
-                    'email'=>$email,
-                    'password'=>$new_password,
+                    'name' => $userdata['name'],
+                    'email' => $email,
+                    'password' => $new_password,
                 ];
                 Mail::send('emails.User_forget_password', $MessageDate, function ($message) use ($email) {
                     $message->to($email)->subject(' كلمه المرور الجديده الخاصه بك  ');
@@ -318,13 +248,75 @@ class UserController extends Controller
                 return $this->success_message('تم ارسال كلمه المرور الجديده الي البريد الالكتروني ');
 
 
-
-            }else{
+            } else {
                 return Redirect::back()->withInput()->withErrors($validator);
             }
         }
 
-        return view('website.users.forget_password');
+        return view('new_website.users.forget_password');
+    }
+
+    public function user_profile(Request $request)
+    {
+        $user = Auth::user()->first();
+        if ($request->isMethod('post')) {
+            $new_data = $request->all();
+            //dd($new_data);
+            $userData = User::where('id', Auth::user()->id)->first();
+            $user_id = $userData['id'];
+            $rules = [
+                'name' => 'required',
+                'mobile' => 'required|max:12|unique:users,mobile,' . $user_id,
+                'address' => 'required',
+                'city' => 'required',
+                'country' => 'required',
+                'state' => 'required',
+                'pincode' => 'required'
+
+            ];
+            $customeMessage = [
+                'name.required' => 'من فضلك ادخل الاسم ',
+                'mobile.required' => ' من فضلك ادخل رقم الهاتف  ',
+                'mobile.max' => 'رقم الهاتف يجب الا يتجاوز   12 رقم ',
+                'mobile.unique' => ' رقم الهاتف متواجد من قبل  ',
+                'address.required' => 'من فضلك ادخل العنوان الخاص بك ',
+                'city.required' => 'من فضلك ادخل المدينه ',
+                'country.required' => 'من فضلك ادخل الدوله ',
+                'state.required' => 'من فضلك ادخل الولايه ',
+                'pincode.required' => 'من فضلك ادخل الرمز البريدي',
+            ];
+            $this->validate($request, $rules, $customeMessage);
+            $userData->update([
+                'name' => $new_data['name'],
+                'email' => $new_data['email'],
+                'mobile' => $new_data['mobile'],
+                'address' => $new_data['address'],
+                'city' => $new_data['city'],
+                'state' => $new_data['state'],
+                'country' => $new_data['country'],
+                'pincode' => $new_data['pincode'],
+
+            ]);
+
+            return $this->success_message('تم تعديل بياناتك بنجاح ');
+
+        }
+        return view('new_website.users.profile',compact('user'));
+    }
+
+    public function account_edit(Request $request)
+    {
+        $user = Auth::user()->first();
+        if($request->isMethod('post')){
+            $alldata = $request->all();
+            $user->update([
+
+            ]);
+
+        }
+
+        return view('new_website.users.account_edit',compact('user'));
+
     }
 
     public function user_logout()

@@ -1,6 +1,6 @@
-@extends('website.layouts.master')
+@extends('new_website.layouts.master')
 @section('title')
-    حسابي
+    حسابي [vdv
 @endsection
 @section('content')
     <div>

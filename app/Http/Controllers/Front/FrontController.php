@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
 use App\Models\Admin\banners;
-use App\Models\admin\Category;
-use App\Models\admin\Product;
+use App\Models\Admin\Category;
+use App\Models\Admin\Product;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,14 +20,15 @@ class FrontController extends Controller
 
     public function index()
     {
+        $categories = Category::all();
         $banners = banners::where('status', 1)->get();
         $new_products = Product::orderBy('id', 'Desc')->where('status', 1)->limit(8)->get();
         $best_seller = Product::where(['best_seller' => 1, 'status' => 1])->inRandomOrder()->limit(8)->get();
         $feature_products = Product::where(['is_feature' => 1, 'status' => 1])->inRandomOrder()->limit(8)->get();
         $offer_products = Product::where('discount', '>', 0)->where('status', 1)->inRandomOrder()->limit(8)->get();
 //        dd($new_products);
-      //  return view('website.index', compact('banners', 'new_products', 'best_seller', 'offer_products', 'feature_products'));
-    return view('welcome');
+       return view('new_website.index', compact('banners', 'new_products', 'best_seller', 'offer_products', 'feature_products','categories'));
+   // return view('welcome');
     }
 
     public function shop_page()
@@ -41,11 +42,11 @@ class FrontController extends Controller
             } elseif ($_GET['sort'] == 'price_from_low_heigh') {
                 $products = $products->orderBy('price', 'Asc');
             } elseif ($_GET['sort'] == 'price_from_hieght_low') {
-                $products = $products->orderBy('price', 'Desc');
+                $products = $products->with(['productImages', 'vendor'])->orderBy('price', 'Desc');
             }
         }
         $products = $products->paginate(12);
-        return view('website.shop', compact('products'));
+        return view('new_website.shop', compact('products'));
     }
 
     public function Category_link($slug)
@@ -64,7 +65,7 @@ class FrontController extends Controller
             }
         }
         $products = $products->paginate(12);
-        return view('website.category', compact('products', 'category_data'));
+        return view('new_website.category', compact('products', 'category_data'));
     }
 
     // contact page
@@ -132,7 +133,7 @@ class FrontController extends Controller
             return $this->exception_message($e);
         }
 
-        return view('website.contact');
+        return view('new_website.contact');
 
     }
 }

@@ -131,7 +131,7 @@ class CheckoutController extends Controller
             return $this->exception_message($e);
         }
 
-        return view('website.checkout', compact('deliverAddress', 'cartItems'));
+        return view('new_website.checkout', compact('deliverAddress', 'cartItems'));
     }
 
     // thanks Function
@@ -141,7 +141,7 @@ class CheckoutController extends Controller
         if(Session::has('order_id')){
             // Empty The Cart
             Cart::where('user_id',Auth::user()->id)->delete();
-            return view('website.thanks');
+            return view('new_website.thanks');
         }else{
             return redirect('/');
         }

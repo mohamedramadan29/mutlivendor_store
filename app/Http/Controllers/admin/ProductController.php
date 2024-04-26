@@ -215,8 +215,24 @@ class ProductController extends Controller
                     "meta_title" => $productdata['meta_title'],
                     "meta_description" => $productdata['meta_description'],
                     "meta_keywords" => $productdata['meta_keywords'],
-
                 ]);
+                // add images to gallary
+                if ($request->hasFile('images')) {
+                    foreach ($request->file('images') as $image) {
+                        if ($image->isValid()) {
+                            // Save image paths in the database
+                            $imagePath = $image->store('public/admin/images/gallary_product_images');
+                            $product->productImages()->create(
+                                [
+                                    'product_id' => $product['id'],
+                                    'image' => $imagePath,
+                                    'status' => 1
+                                ]
+                            );
+                        }
+                    }
+                }
+
                 return $this->success_message('تم تعديل المنتج بنجاح');
             }
         } catch (\Exception $e) {
@@ -296,9 +312,9 @@ class ProductController extends Controller
     public function import_data(Request $request)
     {
         if ($request->isMethod('post')) {
-           // return ($request->file('file')->path());
+            // return ($request->file('file')->path());
             //Excel::import(new ProductImport, $request->file('file')->path());
-          //  Excel::import(new ProductImport(), $request->file('file')->path(), 'xlsx');
+            //  Excel::import(new ProductImport(), $request->file('file')->path(), 'xlsx');
             Excel::import(new ProductImport(), public_path('storage/pro3.xlsx'));
 
             //  return $this->success_message('تم الاسترداد بنجاح');

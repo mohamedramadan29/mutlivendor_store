@@ -109,14 +109,14 @@
                                         <td>
                                             <a href='{{ url('admin/product/update',$product['id']) }}'
                                                class="btn btn-primary btn-sm">
-                                                تعديل <i class="fa fa-edit"></i></a>
+                                                  <i class="fa fa-edit"></i></a>
                                             </a>
-                                            <a href='{{ url('admin/product/add-images',$product['id']) }}'
-                                               class="btn btn-warning btn-sm">
-                                                معرض الصور <i class="fa fa-plus"></i></a>
-                                            </a>
+{{--                                            <a href='{{ url('admin/product/add-images',$product['id']) }}'--}}
+{{--                                               class="btn btn-warning btn-sm">--}}
+{{--                                                معرض الصور <i class="fa fa-plus"></i></a>--}}
+{{--                                            </a>--}}
                                             <button data-target="#delete_model_{{ $product['id'] }}"
-                                                    data-toggle="modal" class="btn btn-danger btn-sm"> حذف <i
+                                                    data-toggle="modal" class="btn btn-danger btn-sm">  <i
                                                     class="fa fa-trash"></i>
                                             </button>
 

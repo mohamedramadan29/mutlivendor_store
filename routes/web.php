@@ -20,15 +20,20 @@ Route::get('shop', [FrontController::class, 'shop_page']);
 Route::get('category/{slug}', [FrontController::class, 'Category_link']);
 // View Product Details
 Route::get('product_details/{slug}', [ProductController::class, 'product_details']);
-
+// Product Review
+Route::post('product_review',[ProductController::class,'product_review']);
 // User Login Register
 Route::get('user/login_register', [UserController::class, 'login_register'])->name('user/login_register');
 Route::post('user/register', [UserController::class, 'register']);
 // User Login
-Route::post('user/login', [UserController::class, 'user_login']);
+//Route::post('user/login', [UserController::class, 'user_login']);
+Route::match(['post','get'],'user/login',[UserController::class,'user_login']);
 Route::group(['middleware' => ['auth']], function () {
     // user Profile
     Route::match(['post', 'get'], 'user/profile', [UserController::class, 'user_profile']);
+    // account edit
+
+    Route::match(['post','get'],'user/edit',[UserController::class,'account_edit']);
     // Change Password
     Route::match(['post', 'get'], 'user/update_password', [UserController::class, 'update_password']);
     // Apply Coupon To Users

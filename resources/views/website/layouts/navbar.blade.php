@@ -97,29 +97,6 @@ $sections = \App\Models\Admin\Section::with('categories')->get();
                                        title="About"> {{$category['name']}} </a>
                                 </li>
                             @endforeach
-
-                            {{--                            <li class="menu-item  menu-item-has-children">--}}
-                            {{--                                <a href="inblog_right-siderbar.html" class="stelina-menu-item-title" title="الاقسام"> كل--}}
-                            {{--                                    الاقسام </a>--}}
-                            {{--                                <span class="toggle-submenu"></span>--}}
-                            {{--                                <ul class="submenu">--}}
-                            {{--                                    <li class="menu-item menu-item-has-children">--}}
-                            {{--                                        <a href="#" class="stelina-menu-item-title" title="Blog Style">العطور </a>--}}
-                            {{--                                        <span class="toggle-submenu"></span>--}}
-                            {{--                                        <ul class="submenu">--}}
-                            {{--                                            <li class="menu-item">--}}
-                            {{--                                                <a href="#">معطرات الغرف </a>--}}
-                            {{--                                            </li>--}}
-                            {{--                                            <li class="menu-item">--}}
-                            {{--                                                <a href="#">فوحات الكترونيه </a>--}}
-                            {{--                                            </li>--}}
-                            {{--                                        </ul>--}}
-                            {{--                                    </li>--}}
-                            {{--                                    <li class="menu-item">--}}
-                            {{--                                        <a href="#"> عطور المنزل </a>--}}
-                            {{--                                    </li>--}}
-                            {{--                                </ul>--}}
-                            {{--                            </li>--}}
                             <li class="menu-item">
                                 <a href="{{url('contact')}}" class="stelina-menu-item-title" title="About"> تواصل
                                     معنا </a>
