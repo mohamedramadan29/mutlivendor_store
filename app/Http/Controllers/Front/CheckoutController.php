@@ -65,6 +65,7 @@ class CheckoutController extends Controller
                     // prepare It
                     $payment_method = 'online';
                     $status = 'pending';
+                    return redirect('payment');
                 }
                 DB::beginTransaction();
                 // Fetch Order Total Price
@@ -104,7 +105,6 @@ class CheckoutController extends Controller
                 $order->grand_total = $grand_total;
                 $order->save();
                 $order_id = DB::getPdo()->lastInsertId();
-
                 // Insert Order Product Details
                 foreach ($cartItems as $item){
                     //
@@ -125,7 +125,6 @@ class CheckoutController extends Controller
                 // Insert Order ID In Session
                 Session::put('order_id',$order_id);
                return redirect('thanks');
-
             }
         } catch (\Exception $e) {
             return $this->exception_message($e);

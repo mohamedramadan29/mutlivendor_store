@@ -22953,3 +22953,7 @@ body.coming-soon-page .header {
     background-color: var(--main-color);
     color: #fff;
 }
+input[type='email']{
+    text-align: right !important;
+    direction: rtl;
+}

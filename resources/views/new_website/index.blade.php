@@ -26,7 +26,8 @@
                                 <img loading="lazy" src="{{\Illuminate\Support\Facades\Storage::url($banner->image)}}"
                                      width="1920" height="600" alt="Pattern" class="slideshow-bg__img object-fit-cover">
                             </div>
-                            <div class="slideshow-text container position-absolute top-50 translate-middle" style="left: 50%">
+                            <div class="slideshow-text container position-absolute top-50 translate-middle"
+                                 style="left: 50%">
                                 <h2 class="fs-70 mb-2 mb-lg-3 animate animate_fade animate_btt animate_delay-5 text-uppercase fw-normal">  {{$banner['sub_title']}} </h2>
                                 <p class="h6 mb-4 pb-2 animate animate_fade animate_btt animate_delay-5 lh-2rem">  {{$banner['title']}} </p>
                                 <div class="animate animate_fade animate_btt animate_delay-7">
@@ -75,8 +76,9 @@
             @endif
         </div>
         <section class="products-carousel container">
-            <h2 class="section-title text-uppercase fs-25 fw-medium text-center mb-2"> عروضنا </h2>
-            <p class="fs-15 mb-4 pb-xl-2 mb-xl-4 text-secondary text-center"> احصل علي افضل العروض والخصومات </p>
+
+            <h2 class="section-title text-uppercase fs-25 fw-medium text-center mb-2"> {{$section1['title']}} </h2>
+            <p class="fs-15 mb-4 pb-xl-2 mb-xl-4 text-secondary text-center">  {{$section1['desc']}} </p>
 
             <div class="position-relative">
                 <div class="swiper-container js-swiper-slider" data-settings='{
@@ -131,7 +133,7 @@
                                             </div><!-- .qty-control -->
                                             <button type="submit"
                                                     class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart"
-                                                    data-aside="cartDrawer" title="Add To Cart">  اضف الي السلة
+                                                    data-aside="cartDrawer" title="Add To Cart"> اضف الي السلة
                                             </button>
                                         </div>
                                     </form>
@@ -145,14 +147,14 @@
                                                 <use href="#icon_heart"></use>
                                             </svg>
                                         </button>
-{{--                                        <button--}}
-{{--                                            class="btn btn-square btn-hover-primary d-block border-1 text-uppercase js-quick-view"--}}
-{{--                                            data-bs-toggle="modal" data-bs-target="#quickView" title="Quick view">--}}
-{{--                                            <svg class="d-inline-block" width="14" height="14" viewBox="0 0 18 18"--}}
-{{--                                                 xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                                <use href="#icon_view"></use>--}}
-{{--                                            </svg>--}}
-{{--                                        </button>--}}
+                                        {{--                                        <button--}}
+                                        {{--                                            class="btn btn-square btn-hover-primary d-block border-1 text-uppercase js-quick-view"--}}
+                                        {{--                                            data-bs-toggle="modal" data-bs-target="#quickView" title="Quick view">--}}
+                                        {{--                                            <svg class="d-inline-block" width="14" height="14" viewBox="0 0 18 18"--}}
+                                        {{--                                                 xmlns="http://www.w3.org/2000/svg">--}}
+                                        {{--                                                <use href="#icon_view"></use>--}}
+                                        {{--                                            </svg>--}}
+                                        {{--                                        </button>--}}
                                     </div>
                                 </div>
 
@@ -162,7 +164,8 @@
                                     </p>
                                     <div
                                         class="product-card__price d-flex align-items-center justify-content-center mb-2">
-                                        <span dir="rtl" class="money price fw-medium">  {{$product['price']}} ر.س </span>
+                                        <span dir="rtl"
+                                              class="money price fw-medium">  {{$product['price']}} ر.س </span>
                                     </div>
                                 </div>
                             </div>
@@ -193,8 +196,8 @@
             <div class="container">
 
 
-                <h2 class="section-title text-uppercase fs-25 fw-medium text-center mb-2"> افضل الاقسام  </h2>
-                <p class="fs-15 mb-4 pb-xl-2 mb-xl-4  text-center"> تصفح افضل اقسام العطور  </p>
+                <h2 class="section-title text-uppercase fs-25 fw-medium text-center mb-2"> {{$section2['title']}}  </h2>
+                <p class="fs-15 mb-4 pb-xl-2 mb-xl-4  text-center">  {{$section2['desc']}}  </p>
 
                 <div class="position-relative">
                     <div class="swiper-container js-swiper-slider" data-settings='{
@@ -230,10 +233,12 @@
                             @foreach($categories as $category)
                                 <div class="swiper-slide">
                                     <img loading="lazy" class="w-100 mb-3"
-                                         src="{{\Illuminate\Support\Facades\Storage::url($category['image'])}}" width="330"
+                                         src="{{\Illuminate\Support\Facades\Storage::url($category['image'])}}"
+                                         width="330"
                                          height="400" alt="">
                                     <div class="text-center">
-                                        <a href="{{url("category/".$category['slug'])}}" class="menu-link h6 fw-medium text-uppercase"> {{$category['name']}} </a>
+                                        <a href="{{url("category/".$category['slug'])}}"
+                                           class="menu-link h6 fw-medium text-uppercase"> {{$category['name']}} </a>
                                     </div>
                                 </div>
                             @endforeach
@@ -247,8 +252,8 @@
         <div class="mb-3 mb-xl-5 pb-3 pt-1 pb-xl-5"></div>
 
         <section class="products-carousel container">
-            <h2 class="section-title text-uppercase fs-25 fw-medium text-center mb-2"> احصل علي افضل المنتجات  </h2>
-            <p class="fs-15 mb-2 pb-xl-2 text-secondary text-center">   خلافاَ للإعتقاد السائد فإن لوريم إيبسوم ليس نصاَ عشوائياً، </p>
+            <h2 class="section-title text-uppercase fs-25 fw-medium text-center mb-2"> {{$section3['title']}} </h2>
+            <p class="fs-15 mb-2 pb-xl-2 text-secondary text-center">  {{$section3['desc']}} </p>
 
 
             <div class="position-relative">
@@ -304,7 +309,7 @@
                                             </div><!-- .qty-control -->
                                             <button type="submit"
                                                     class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart"
-                                                    data-aside="cartDrawer" title="Add To Cart">  اضف الي السلة
+                                                    data-aside="cartDrawer" title="Add To Cart"> اضف الي السلة
                                             </button>
                                         </div>
                                     </form>
@@ -335,7 +340,8 @@
                                     </p>
                                     <div
                                         class="product-card__price d-flex align-items-center justify-content-center mb-2">
-                                        <span dir="rtl" class="money price fw-medium">  {{$product['price']}} ر.س </span>
+                                        <span dir="rtl"
+                                              class="money price fw-medium">  {{$product['price']}} ر.س </span>
                                     </div>
                                 </div>
                             </div>
@@ -364,45 +370,14 @@
 
         <section class="lookbook-products container">
             <div class="position-relative">
-                <img loading="lazy" src="{{asset('assets/new_website/images/home/demo15/banner-1.jpg')}}"
+                <img loading="lazy" src="{{Storage::url($under_banner['image'])}}"
                      class="w-100 h-auto" width="1410" height="600" alt="">
                 <div class="content d-none d-lg-block text-center py-5 px-5 bg-white position-absolute position-center">
-                    <h3 class="fs-22 fw-medium text-uppercase mb-2">Bring Out The Hidden Beauty</h3>
-                    <p class="fs-15 color-gray-5a5a5a mb-2">Get styled with the high-fashion products and transform
-                        yourself.</p>
-                    <a href="shop.php" class="btn-link btn-link_md default-underline text-uppercase fw-medium">Shop
-                        Now</a>
+                    <h3 class="fs-22 fw-medium text-uppercase mb-2"> {{$under_banner['title']}} </h3>
+                    <p class="fs-15 color-gray-5a5a5a mb-2"> {{$under_banner['sub_title']}} </p>
+                    <a href="{{$under_banner['link']}}"
+                       class="btn-link btn-link_md default-underline text-uppercase fw-medium"> {{ $under_banner['button_text'] }}</a>
                 </div>
-                <button class="popover-point type3 position-absolute" style="left: 6%; top: 23%;"
-                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-content="
-            <div class=&quot;popover-product&quot;>
-              <a href=_/product1_simple.php>
-                <img loading=&quot;lazy&quot; class=&quot;mb-3&quot; src=_/images/home/demo15/product-4.php alt=&quot;&quot; />
-              </a>
-              <p class=&quot;fw-medium mb-0&quot;><a href=_/product1_simple.php>RISE & SHINE</a></p>
-              <p class=&quot;mb-0&quot;>$129</p>
-            </div>
-          " data-bs-original-title="" title=""><span>+</span></button>
-                <button class="popover-point type3 position-absolute" style="left: 15%; top: 61%;"
-                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-content="
-            <div class=&quot;popover-product&quot;>
-              <a href=_/product1_simple.php>
-                <img loading=&quot;lazy&quot; class=&quot;mb-3&quot; src=_/images/home/demo15/product-4.php alt=&quot;&quot; />
-              </a>
-              <p class=&quot;fw-medium mb-0&quot;><a href=_/product1_simple.php>RISE & SHINE</a></p>
-              <p class=&quot;mb-0&quot;>$129</p>
-            </div>
-          " data-bs-original-title="" title=""><span>+</span></button>
-                <button class="popover-point type3 position-absolute" style="left: 37%; top: 83%;"
-                        data-bs-toggle="popover" data-bs-trigger="focus" data-bs-content="
-            <div class=&quot;popover-product&quot;>
-              <a href=_/product1_simple.php>
-                <img loading=&quot;lazy&quot; class=&quot;mb-3&quot; src=_/images/home/demo15/product-4.php alt=&quot;&quot; />
-              </a>
-              <p class=&quot;fw-medium mb-0&quot;><a href=_/product1_simple.php>RISE & SHINE</a></p>
-              <p class=&quot;mb-0&quot;>$129</p>
-            </div>
-          " data-bs-original-title="" title=""><span>+</span></button>
             </div>
         </section>
 
@@ -444,34 +419,13 @@
             }
           }'>
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img loading="lazy" src="{{asset('assets/new_website/images/brands/brand1.png')}}"
-                                     width="120" height="20" alt="">
-                            </div>
-                            <div class="swiper-slide">
-                                <img loading="lazy" src="{{asset('assets/new_website/images/brands/brand2.png')}}"
-                                     width="87" height="20" alt="">
-                            </div>
-                            <div class="swiper-slide">
-                                <img loading="lazy" src="{{asset('assets/new_website/images/brands/brand3.png')}}"
-                                     width="132" height="22" alt="">
-                            </div>
-                            <div class="swiper-slide">
-                                <img loading="lazy" src="{{asset('assets/new_website/images/brands/brand4.png')}}"
-                                     width="72" height="21" alt="">
-                            </div>
-                            <div class="swiper-slide">
-                                <img loading="lazy" src="{{asset('assets/new_website/images/brands/brand5.png')}}"
-                                     width="123" height="31" alt="">
-                            </div>
-                            <div class="swiper-slide">
-                                <img loading="lazy" src="{{asset('assets/new_website/images/brands/brand6.png')}}"
-                                     width="137" height="22" alt="">
-                            </div>
-                            <div class="swiper-slide">
-                                <img loading="lazy" src="{{asset('assets/new_website/images/brands/brand7.png')}}"
-                                     width="94" height="21" alt="">
-                            </div>
+                            @foreach($brands as $brand)
+                                <div class="swiper-slide">
+                                    <img loading="lazy"
+                                         src="{{\Illuminate\Support\Facades\Storage::url($brand['image'])}}"
+                                         width="120" height="20" alt="">
+                                </div>
+                            @endforeach
                         </div>
                         <!-- /.swiper-wrapper -->
                     </div><!-- /.swiper-container js-swiper-slider -->

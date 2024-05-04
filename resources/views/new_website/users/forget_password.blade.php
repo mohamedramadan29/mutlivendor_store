@@ -1,74 +1,32 @@
-@extends('website.layouts.master')
+@extends('new_website.layouts.master')
 @section('title')
-    تسجيل دخول / حساب جديد للمستخدم
+    نسيت كلمة المرور
 @endsection
 @section('content')
-    <div>
-        <div class="main-content main-content-login">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="breadcrumb-trail breadcrumbs">
-                            <ul class="trail-items breadcrumb">
-                                <li class="trail-item trail-begin">
-                                    <a href="{{url('/')}}"> الرئيسيه </a>
-                                </li>
-                                <li class="trail-item trail-end active">
-                                    نسيت كلمه المرور
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+<main>
+    <div class="mb-4 pb-4"></div>
+    <section class="login-register container">
+        <h2 class="section-title text-center fs-3 "> تغير كلمة المرور  </h2>
+        <p> سوف نرسل لك بريدًا إلكترونيًا لإعادة تعيين كلمة المرور الخاصة بك </p>
+        <div class="reset-form">
+            <form action="{{url('user/forget_password')}}" method="post" name="reset-form" class="needs-validation" novalidate>
+                @csrf
+                <div class="form-floating mb-3">
+                    <input name="email" type="email" class="form-control form-control_gray" id="customerNameEmailInput" required value="{{old('email')}}">
+                    <label for="customerNameEmailInput"> البريد الالكتروني  *</label>
                 </div>
-                <div class="row">
-                    <div class="content-area col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="site-main">
-                            <h3 class="custom_blog_title">
-                                نسيت كلمه المرور
-                            </h3>
-                            <div class="customer_login">
-                                <div class="row">
-                                    @if(Session::has('Success_message'))
-                                        <div
-                                            class="alert alert-success"> {{Session::get('Success_message')}} </div>
-                                    @endif
 
-                                    @if ($errors->any())
-                                        <div class="alert alert-danger">
-                                            <ul>
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    @endif
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="login-item">
+                <button class="btn btn-primary w-100 text-uppercase" type="submit"> ارسال  </button>
 
-                                            <form class="login" action="{{url('user/forget_password')}}" method="post">
-                                                @csrf
-                                                <p class="form-row form-row-wide">
-                                                    <label class="text"> البريد الالكتروني </label>
-                                                    <input title="البريد الالكتروني " type="email" class="input-text"
-                                                           name="email" value="{{old('email')}}">
-                                                </p>
-                                                <p class="lost_password">
-                                                    <br>
-                                                    <a href="{{url('user/login_register')}}" class="forgot-pw"> تسجيل دخول ؟ </a>
-                                                    <br>
-                                                </p>
-                                                <p class="form-row">
-                                                    <input type="submit" class="button-submit" value=" ارسال  ">
-                                                </p>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="customer-option mt-4 text-center">
+                    <span class="text-secondary"> الرجوع الي :  </span>
+                    <a href="{{url('user/login_register')}}" class="btn-text js-show-register"> تسجيل دخول  </a>
                 </div>
-            </div>
+            </form>
         </div>
+    </section>
+</main>
+
+<div class="mb-5 pb-xl-5"></div>
+
 @endsection

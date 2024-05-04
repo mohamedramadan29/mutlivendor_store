@@ -7,7 +7,7 @@ use App\Http\Controllers\Front\VendorController;
 use App\Http\Controllers\Front\ProductController;
 use App\Http\Controllers\Front\CheckoutController;
 use App\Http\Controllers\Front\OrderController;
-
+use App\Http\Controllers\Front\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 //Index Page
@@ -43,6 +43,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('thanks',[CheckoutController::class,'thanks']);
     // User Orders
     Route::get('orders/index/{id?}',[OrderController::class,'orders']);
+
+    //Start Payment Routes
+    Route::match(['post','get'],'payment',[PaymentController::class,'index']);
 });
 
 

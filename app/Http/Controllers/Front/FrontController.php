@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
 use App\Models\Admin\banners;
+use App\Models\Admin\Brand;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
+use App\Models\Admin\under_banner;
 use App\Models\Admin\website_advantage;
 use App\Models\Contact;
+use App\Models\FrontTitle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -27,10 +30,16 @@ class FrontController extends Controller
         $best_seller = Product::where(['best_seller' => 1, 'status' => 1])->inRandomOrder()->limit(8)->get();
         $feature_products = Product::where(['is_feature' => 1, 'status' => 1])->inRandomOrder()->limit(8)->get();
         $offer_products = Product::where('discount', '>', 0)->where('status', 1)->inRandomOrder()->limit(8)->get();
+        $under_banner = under_banner::where('id',1)->first();
         $advantages = website_advantage::all();
+        $section1 = FrontTitle::where('id',1)->first();
+        $section2 = FrontTitle::where('id',2)->first();
+        $section3 = FrontTitle::where('id',3)->first();
+        $brands = Brand::select('image')->get();
 //        dd($new_products);
-       return view('new_website.index', compact('banners', 'new_products', 'best_seller', 'offer_products', 'feature_products','categories','advantages'));
-   // return view('welcome');
+       return view('new_website.index', compact('banners', 'new_products', 'best_seller', 'offer_products',
+           'feature_products','categories','advantages','section1','section2','section3','under_banner','brands'));
+   // return view('welcome');Ò
     }
 
     public function shop_page()
