@@ -7,12 +7,16 @@
                         type="button"><span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{url('admin/brands/add')}}">
+            <form method="post" action="{{url('admin/brands/add')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
                         <label>  اسم العلامة التجارية  </label>
                         <input required type="text" name="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>  صورة العلامة التجارية   </label>
+                        <input required type="file" name="image" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>  الحاله  </label>

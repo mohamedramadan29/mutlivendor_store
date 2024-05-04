@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-     العلامات التجارية
+    البانر الاساسي
 @endsection
 @section('css')
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>
@@ -16,7 +16,7 @@
         <div class="my-auto">
             <div class="d-flex">
                 <h4 class="content-title mb-0 my-auto">الرئيسية </h4><span
-                    class="text-muted mt-1 tx-13 mr-2 mb-0">/ العلامات التجارية  </span>
+                    class="text-muted mt-1 tx-13 mr-2 mb-0">/   البانر الاساسي   </span>
             </div>
         </div>
     </div>
@@ -28,13 +28,10 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <button data-target="#add_model"
-                            data-toggle="modal" class="btn btn-primary"> اضافة علامة  <i
-                            class="fa fa-plus"></i>
-                    </button>
+
                 </div>
                 <!-- Add New Section -->
-                @include('admin.brands.add')
+                @include('admin.banners.add')
                 <div class="card-body">
                     @if(Session::has('Success_message'))
                         <div
@@ -56,9 +53,10 @@
                                 <thead>
                                 <tr>
                                     <th class="wd-15p border-bottom-0"> #</th>
-                                    <th class="wd-15p border-bottom-0"> الاسم  </th>
-                                    <th class="wd-15p border-bottom-0">  الصورة  </th>
-                                    <th class="wd-15p border-bottom-0"> الحالة</th>
+                                    <th class="wd-15p border-bottom-0"> العنوان  </th>
+                                    <th class="wd-15p border-bottom-0"> العنوان الفرعي </th>
+                                    <th class="wd-15p border-bottom-0"> رابط الزر </th>
+                                    <th class="wd-15p border-bottom-0">  الصوره  </th>
                                     <th class="wd-15p border-bottom-0"> العمليات</th>
                                 </tr>
                                 </thead>
@@ -66,35 +64,25 @@
                                 @php
                                     $i = 1;
                                 @endphp
-                                @foreach($brands as $brand)
+                                @foreach($banners as $banner)
                                     <tr>
                                         <td> {{$i++}} </td>
-                                        <td> {{$brand['name']}} </td>
-                                        <td><img width="80px" src="{{\Illuminate\Support\Facades\Storage::url($brand['image'])}}" alt=""> </td>
-                                        <td>
-                                            @if($brand['status'] == 1)
-                                                <span class="badge badge-success"> نشط  </span>
-                                            @elseif($brand['status'] == 0)
-                                                <span class="badge badge-danger"> غير نشط </span>
-                                            @endif
-                                        </td>
+                                        <td> {{$banner['title']}} </td>
+                                        <td> {{$banner['sub_title']}} </td>
+                                        <td> {{$banner['link']}} </td>
+                                        <td><img width="90px" src="{{Storage::url($banner->image)}}" alt=""> </td>
+
                                         <td>
                                             <button class="btn btn-primary btn-sm"
-                                                    data-target="#edit_model_{{$brand['id']}}"
+                                                    data-target="#edit_model_{{$banner['id']}}"
                                                     data-toggle="modal"> تعديل <i class="fa fa-edit"></i></button>
-                                            <button data-target="#delete_model_{{$brand['id']}}"
-                                                    data-toggle="modal" class="btn btn-danger btn-sm"> حذف <i
-                                                    class="fa fa-trash"></i>
-                                            </button>
+
                                         </td>
                                     </tr>
-
-                                    <!-- Edit Sections -->
-                                    @include('admin.brands.edit')
-
-                                    <!-- Delete Section Model  -->
-                                   @include('admin.brands.delete')
                                 @endforeach
+                                    <!-- Edit Sections -->
+                                    @include('admin.website_settings.under_banner.edit')
+
                                 </tbody>
                             </table>
                         </div>

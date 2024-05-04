@@ -7,7 +7,7 @@
                         type="button"><span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{url('admin/brands/update')}}">
+            <form method="post" action="{{url('admin/brands/update')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
@@ -15,6 +15,12 @@
                         <label> اسم القسم </label>
                         <input required type="text" name="brand_name" class="form-control"
                                value="{{$brand['name']}}">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="brand_id" value="{{$brand['id']}}">
+                        <label> تعديل صورة  </label>
+                        <input type="file" name="image" class="form-control">
+                        <img width="80" src="{{Storage::url($brand['image'])}}">
                     </div>
                     <div class="form-group">
                         <label> حالة القسم </label>

@@ -228,6 +228,10 @@
                     <ul class="slide-menu">
                         <li><a class="slide-item" href="{{url('admin/banners')}}"> البانرز </a>
                         </li>
+                        <li><a class="slide-item" href="{{url('admin/website_advantage')}}"> مميزات المتجر  </a>
+                        <li><a class="slide-item" href="{{url('admin/front_titles')}}"> التحكم في العناوين الرئيسية   </a>
+                        <li><a class="slide-item" href="{{url('admin/under_banner')}}"> البانر الاساسي    </a>
+                        </li>
 
                     </ul>
                 </li>

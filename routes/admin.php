@@ -10,6 +10,9 @@ use App\Http\Controllers\admin\BannerController;
 use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\Admin\UserController;
 use \App\Http\Controllers\Admin\OrdersController;
+use \App\Http\Controllers\admin\AdvantageController;
+use \App\Http\Controllers\Front\FrontTitleController;
+use \App\Http\Controllers\admin\UnderBannerController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -119,5 +122,17 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('update_order_status',[OrdersController::class,'update_order_status']);
         // Update Item  Status
         Route::post('update_item_status',[OrdersController::class,'update_item_status']);
+        // Website advatege
+        Route::match(['post','get'],'website_advantage',[AdvantageController::class,'index']);
+        Route::post('website_advantage/add',[AdvantageController::class,'add']);
+        Route::post('website_advantage/edit/{id}',[AdvantageController::class,'edit']);
+        Route::post('website_advantage/delete/{id}',[AdvantageController::class,'delete']);
+
+        // Start Front Title controller
+        Route::get('front_titles',[FrontTitleController::class,'index']);
+        Route::post('front_titles/edit/{id}',[FrontTitleController::class,'edit']);
+        // Start Under Banner
+        Route::get('under_banner',[UnderBannerController::class,'index']);
+        Route::post('under_banner/edit',[UnderBannerController::class,'edit']);
     });
 });

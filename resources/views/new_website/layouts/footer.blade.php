@@ -1,43 +1,23 @@
 <!-- Footer Type 1 with Top block -->
+@php
+$advantages = \App\Models\Admin\website_advantage::all();
+
+@endphp
 <footer class="footer footer_type_1 dark">
     <div class="footer-top container py-0" dir="rtl">
         <div class="service-promotion horizontal container">
             <div class="row">
-                <div class="col-md-4 mb-5 mb-md-0 d-flex align-items-center justify-content-md-center gap-3">
-                    <div class="service-promotion__icon">
-                        <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <use href="#icon_shipping" />
-                        </svg>
-                    </div>
-                    <div class="service-promotion__content-wrap">
-                        <h3 class="service-promotion__title h6 text-uppercase mb-1 text-white"> توصيل سريع ومجاني </h3>
-                        <p class="service-promotion__content text-secondary mb-0 text-white"> التوصيل مجاني لجميع الطلبات التي تزيد قيمتها عن 140 ريال </p>
-                    </div>
-                </div><!-- /.col-md-4 text-center-->
-
-                <div class="col-md-4 mb-5 mb-md-0 d-flex align-items-center justify-content-md-center gap-3">
-                    <div class="service-promotion__icon">
-                        <svg width="53" height="52" viewBox="0 0 53 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <use href="#icon_headphone" />
-                        </svg>
-                    </div>
-                    <div class="service-promotion__content-wrap">
-                        <h3 class="service-promotion__title h6 text-uppercase mb-1 text-white"> دعم العملاء على مدار 24 ساعة طوال أيام الأسبوع </h3>
-                        <p class="service-promotion__content text-secondary mb-0 text-white"> دعم عملاء ودود على مدار 24 ساعة طوال أيام الأسبوع </p>
-                    </div>
-                </div><!-- /.col-md-4 text-center-->
-
-                <div class="col-md-4 mb-5 mb-md-0 d-flex align-items-center justify-content-md-center gap-3">
-                    <div class="service-promotion__icon">
-                        <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <use href="#icon_shield" />
-                        </svg>
-                    </div>
-                    <div class="service-promotion__content-wrap">
-                        <h3 class="service-promotion__title h6 text-uppercase mb-1 text-white"> ضمان استعادة الاموال </h3>
-                        <p class="service-promotion__content text-secondary mb-0 text-white"> نقوم بإرجاع الأموال خلال 30 يومًا </p>
-                    </div>
-                </div><!-- /.col-md-4 text-center-->
+                @foreach($advantages as $adv)
+                    <div class="col-md-4 mb-5 mb-md-0 d-flex align-items-center justify-content-md-center gap-3">
+                        <div class="service-promotion__icon">
+                            <img style="width: 60px;height: 60px" src="{{\Illuminate\Support\Facades\Storage::url($adv['image'])}}" alt="">
+                        </div>
+                        <div class="service-promotion__content-wrap">
+                            <h3 class="service-promotion__title h6 text-uppercase mb-1 text-white"> {{$adv['title']}} </h3>
+                            <p class="service-promotion__content text-secondary mb-0 text-white"> {{$adv['desc']}}  </p>
+                        </div>
+                    </div><!-- /.col-md-4 text-center-->
+                @endforeach
             </div><!-- /.row -->
         </div><!-- /.service-promotion container -->
     </div><!-- /.footer-top container -->

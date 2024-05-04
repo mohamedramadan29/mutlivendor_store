@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
 use App\Models\Admin\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
@@ -35,12 +36,19 @@ class BrandController extends Controller
                 'name.min' => 'من فضلك ادخل اسم القسم بشكل صحيح',
             ];
             $this->validate($request, $rules, $custome_messages);
+            if ($request->hasFile('image')){
+                $img_tmp = $request->file('image');
+                if($img_tmp->isValid()){
+                    $image = $request->file('image')->store('public/admin/images/brands');
+                }
+            }
             $brand = new Brand();
+
             $brand->name = $new_brands['name'];
+            $brand->image = $image;
             $brand->status = $new_brands['status'];
             $brand->save();
             return $this->success_message(' تم اضافه علامه تجارية بنجاح ');
-
         }catch (\Exception $e){
             return $this->exception_message($e);
         }
@@ -49,10 +57,7 @@ class BrandController extends Controller
 
     public function update(Request $request)
     {
-
         try {
-
-
             $brand_data = $request->all();
             $brand = Brand::where('id', $brand_data['brand_id'])->first();
             $rules = [
@@ -64,6 +69,19 @@ class BrandController extends Controller
                 'brand_name.min' => 'من فضلك ادخل اسم العلامة بشكل صحيح',
             ];
             $this->validate($request, $rules, $custome_messages);
+            if ($request->hasFile('image')){
+                $img_tmp = $request->file('image');
+                if($img_tmp->isValid()){
+                    $image = $request->file('image')->store('public/admin/images/brands');
+                    // delete old image
+                    if ($brand['image'] != '') {
+                        Storage::delete($brand['image']);
+                    }
+                    $brand->update([
+                        'image'=>$image,
+                    ]);
+                }
+            }
             $brand->update([
                 'name' => $brand_data['brand_name'],
                 'status' => $brand_data['brand_status']
