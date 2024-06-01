@@ -134,8 +134,7 @@
                                             <input type="file" class="form-control" name="image" accept="image/*">
                                         </div>
                                         @if (!empty($category['image']))
-                                            <img width="80px" src="{{ Storage::url($category['image']) }}"
-                                                class="img-fluid img-thumbnail">
+                                            <img width="50px" class="img-thumbnail img-fluid" src="{{asset('assets/images/category_images/'.$category['image'])}}">
                                         @endif
 
                                     </div>

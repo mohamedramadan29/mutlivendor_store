@@ -81,8 +81,8 @@
                                                 <span> {{$category['parentCategory']['name']}} </span>
                                             @endif
                                              </td>
-                                        <td><img width="50px" class="img-thumbnail img-fluid"
-                                                 src="{{ Storage::url($category['image']) }}">
+                                        <td>
+                                            <img width="50px" class="img-thumbnail img-fluid" src="{{asset('assets/images/category_images/'.$category['image'])}}">
                                         </td>
                                         <td>
                                             @if ($category['status'] == 1)

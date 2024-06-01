@@ -10,7 +10,7 @@ $advantages = \App\Models\Admin\website_advantage::all();
                 @foreach($advantages as $adv)
                     <div class="col-md-4 mb-5 mb-md-0 d-flex align-items-center justify-content-md-center gap-3">
                         <div class="service-promotion__icon">
-                            <img style="width: 60px;height: 60px" src="{{\Illuminate\Support\Facades\Storage::url($adv['image'])}}" alt="">
+                            <img style="width: 60px;height: 60px" src="{{asset('assets/images/advantage_images/'.$adv['image'])}}" alt="">
                         </div>
                         <div class="service-promotion__content-wrap">
                             <h3 class="service-promotion__title h6 text-uppercase mb-1 text-white"> {{$adv['title']}} </h3>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
+use App\Http\Traits\Upload_Images;
 use App\Models\Admin\banners;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class BannerController extends Controller
 {
     use Message_Trait;
+    use Upload_Images;
 
     public function index()
     {
@@ -40,18 +42,14 @@ class BannerController extends Controller
             $this->validate($request, $rules, $CustomeMessage);
             /// Upload Banner Image
             if ($request->hasFile('image')) {
-                $img_tmp = $request->file('image');
-                if ($img_tmp->isValid()) {
-                    $image = $request
-                        ->file('image')
-                        ->store('public/admin/images/banner_images');
-                }
+                $file_name = $this->saveImage($request->image, public_path('assets/images/banner_images'));
+
             }
             $banner->title = $new_banner['title'];
             $banner->sub_title = $new_banner['sub_title'];
             $banner->status = $new_banner['status'];
             $banner->link = $new_banner['link'];
-            $banner->image = $image;
+            $banner->image = $file_name;
             $banner->save();
             return $this->success_message('تم اضافه البانر بنجاح');
 
@@ -95,22 +93,15 @@ class BannerController extends Controller
             ]);
             /// Update Banner Image
             if ($request->hasFile('image')) {
-                $img_tmp = $request->file('image');
-
-                if ($img_tmp->isValid()) {
-
-                    $image = $request
-                        ->file('image')
-                        ->store('public/admin/images/banner_images');
-
+                $file_name = $this->saveImage($request->image, public_path('assets/images/banner_images'));
                     //remove Old Image
                     if ($banner['image'] != '') {
-                        Storage::delete($banner['image']);
+                        unlink('assets/images/banner_images/'.$banner['image']);
+
                     }
                     $banner->update([
-                        'image' => $image
+                        'image' => $file_name
                     ]);
-                }
             }
             return $this->success_message(' تم تعديل البانر بنجاح ');
         } catch (\Exception $e) {

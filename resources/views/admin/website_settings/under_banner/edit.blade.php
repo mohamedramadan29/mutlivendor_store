@@ -45,7 +45,7 @@
                     <div class="form-group">
                         <label> الصوره  </label>
                         <input type="file" name="image" class="form-control">
-                        <img width="80px" height="80px" src="{{\Illuminate\Support\Facades\Storage::url($banner->image)}}" alt="">
+                        <img width="80px" height="80px" src="{{asset('assets/images/under_banner/'.$banner['image'])}}" alt="">
                     </div>
                 </div>
                 <div class="modal-footer">

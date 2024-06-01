@@ -86,7 +86,7 @@
                                             <div class="swiper-slide">
                                                 <a href="{{url('product_details/'.$product['slug'])}}"><img
                                                         loading="lazy"
-                                                        src="{{Storage::url($product['image'])}}"
+                                                        src="{{asset('assets/images/product_images/'.$product['image'])}}"
                                                         width="330" height="400"
                                                         alt="Cropped Faux leather Jacket"
                                                         class="pc__img"></a>
@@ -95,7 +95,7 @@
                                                 <div class="swiper-slide">
                                                     <a href="{{url('product_details/'.$product['slug'])}}"><img
                                                             loading="lazy"
-                                                            src="{{\Illuminate\Support\Facades\Storage::url($sub_image->image)}}"
+                                                            src="{{asset('assets/images/gallary_product_images/'.$sub_image['image'])}}"
                                                             width="330" height="400"
                                                             alt="Cropped Faux leather Jacket"
                                                             class="pc__img"></a>

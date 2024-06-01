@@ -6,10 +6,11 @@ use App\Exports\ProductExport;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
 use App\Http\Traits\Slug_Trait;
+use App\Http\Traits\Upload_Images;
 use App\Imports\ProductImport;
 use App\Models\Admin\Brand;
-use App\Models\admin\Category;
-use App\Models\admin\Product;
+use App\Models\Admin\Category;
+use App\Models\Admin\Product;
 use App\Models\Admin\ProductImages;
 use App\Models\Admin\Section;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ class ProductController extends Controller
 {
     use Message_Trait;
     use Slug_Trait;
+    use Upload_Images;
 
     public function index()
     {
@@ -88,14 +90,18 @@ class ProductController extends Controller
                 // dd($productdata);
                 $product = new Product();
                 /// Upload PRODUCT IMAGE
-                if ($request->hasFile('image')) {
-                    $img_tmp = $request->file('image');
-                    if ($img_tmp->isValid()) {
-                        $image = $request
-                            ->file('image')
-                            ->store('public/admin/images/product_images');
-                    }
-                }
+                ///
+                ///
+//                if ($request->hasFile('image')) {
+//                    $img_tmp = $request->file('image');
+//                    if ($img_tmp->isValid()) {
+//                        $image = $request
+//                            ->file('image')
+//                            ->store('public/admin/images/product_images');
+//                    }
+//                }
+                // Upload Image With Another Way Used Trait
+                $file_name = $this->saveImage($request->image, public_path('assets/images/product_images'));
                 $categorydata = Category::find($productdata['category_id']);
 
                 $product->section_id = $categorydata['section_id'];
@@ -119,7 +125,7 @@ class ProductController extends Controller
                 $product->meta_title = $productdata['meta_title'];
                 $product->meta_description = $productdata['meta_description'];
                 $product->meta_keywords = $productdata['meta_keywords'];
-                $product->image = $image;
+                $product->image = $file_name;
                 $product->save();
                 return $this->success_message('تم اضافه المنتج بنجاح');
             }
@@ -127,9 +133,9 @@ class ProductController extends Controller
             return $this->exception_message($e);
         }
 
-
         return view('admin.products.add', compact('allbrands', 'categories', 'allcategory', 'allsections', 'user_type'));
     }
+
 
     public function update($id, Request $request)
     {
@@ -178,20 +184,17 @@ class ProductController extends Controller
 
                 /// Upload PRODUCT IMAGE
                 if ($request->hasFile('image')) {
-                    $img_tmp = $request->file('image');
-                    if ($img_tmp->isValid()) {
-                        $image = $request
-                            ->file('image')
-                            ->store('public/admin/images/product_images');
-                        // delete old image
-                        if ($product['image'] != '') {
-                            Storage::delete($product['image']);
-                        }
-                        $product->update([
-                            'image' => $image
-                        ]);
+                    $file_name = $this->saveImage($request->image, public_path('assets/images/product_images'));
+                    // delete old image
+                    if ($product['image'] != '') {
+                        unlink('assets/images/product_images/' . $product['image']);
                     }
+                    $product->update([
+                        'image' => $file_name
+                    ]);
+
                 }
+
                 $categorydata = Category::find($productdata['category_id']);
                 $product->update([
                     "section_id" => $categorydata['section_id'],
@@ -219,17 +222,18 @@ class ProductController extends Controller
                 // add images to gallary
                 if ($request->hasFile('images')) {
                     foreach ($request->file('images') as $image) {
-                        if ($image->isValid()) {
-                            // Save image paths in the database
-                            $imagePath = $image->store('public/admin/images/gallary_product_images');
-                            $product->productImages()->create(
-                                [
-                                    'product_id' => $product['id'],
-                                    'image' => $imagePath,
-                                    'status' => 1
-                                ]
-                            );
-                        }
+                        $file_name = $this->saveImage($image, public_path('assets/images/gallary_product_images'));
+
+                        // Save image paths in the database
+//                            $imagePath = $image->store('public/admin/images/gallary_product_images');
+                        $product->productImages()->create(
+                            [
+                                'product_id' => $product['id'],
+                                'image' => $file_name,
+                                'status' => 1
+                            ]
+                        );
+
                     }
                 }
 

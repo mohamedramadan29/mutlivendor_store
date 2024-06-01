@@ -149,10 +149,8 @@
                                         <div class="col-md-9">
                                             <input type="file" class="form-control" name="image"
                                                    accept="image/*">
-                                            <img class="img-thumbnail img-fluid" width="80px"
-                                                 src="{{\Illuminate\Support\Facades\Storage::url($product['image'])}}">
+                                            <img width="50px" class="img-thumbnail img-fluid" src="{{asset('assets/images/product_images/'.$product['image'])}}">
 
-                                            {{--                                            <img class="img-thumbnail img-fluid" width="80px" src="{{ asset('public/'.Storage::url($product['image'])) }}">--}}
                                         </div>
 
                                     </div>
@@ -334,8 +332,8 @@
                             <tbody>
                             @foreach($product['productImages'] as $image_data)
                                 <tr>
-                                    <td><img width="100px"
-                                             src="{{\Illuminate\Support\Facades\Storage::url($image_data->image)}}">
+                                    <td>
+                                        <img width="50px" class="img-thumbnail img-fluid" src="{{asset('assets/images/gallary_product_images/'.$image_data['image'])}}">
                                     </td>
                                     <td>
                                         <button data-target="#delete_model_{{ $image_data['id'] }}"

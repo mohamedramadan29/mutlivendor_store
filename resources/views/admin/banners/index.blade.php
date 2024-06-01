@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-   البانرز
+    البانرز
 @endsection
 @section('css')
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>
@@ -29,7 +29,7 @@
             <div class="card">
                 <div class="card-header">
                     <button data-target="#add_model"
-                            data-toggle="modal" class="btn btn-primary">  اضافه بانرر جديد <i
+                            data-toggle="modal" class="btn btn-primary"> اضافه بانرر جديد <i
                             class="fa fa-plus"></i>
                     </button>
                 </div>
@@ -56,10 +56,10 @@
                                 <thead>
                                 <tr>
                                     <th class="wd-15p border-bottom-0"> #</th>
-                                    <th class="wd-15p border-bottom-0"> العنوان  </th>
-                                    <th class="wd-15p border-bottom-0"> العنوان الفرعي </th>
-                                    <th class="wd-15p border-bottom-0"> رابط الزر </th>
-                                    <th class="wd-15p border-bottom-0">  الصوره  </th>
+                                    <th class="wd-15p border-bottom-0"> العنوان</th>
+                                    <th class="wd-15p border-bottom-0"> العنوان الفرعي</th>
+                                    <th class="wd-15p border-bottom-0"> رابط الزر</th>
+                                    <th class="wd-15p border-bottom-0"> الصوره</th>
                                     <th class="wd-15p border-bottom-0"> الحالة</th>
                                     <th class="wd-15p border-bottom-0"> العمليات</th>
                                 </tr>
@@ -74,7 +74,10 @@
                                         <td> {{$banner['title']}} </td>
                                         <td> {{$banner['sub_title']}} </td>
                                         <td> {{$banner['link']}} </td>
-                                        <td><img width="90px" src="{{Storage::url($banner->image)}}" alt=""> </td>
+                                        <td>
+                                            <img width="50px" class="img-thumbnail img-fluid"
+                                                 src="{{asset('assets/images/banner_images/'.$banner['image'])}}">
+                                        </td>
                                         <td>
                                             @if($banner['status'] == 1)
                                                 <span class="badge badge-success"> نشط  </span>

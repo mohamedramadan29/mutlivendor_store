@@ -71,7 +71,9 @@
                                         <td> {{$i++}} </td>
                                         <td> {{$adv['title']}} </td>
                                         <td> {{$adv['desc']}} </td>
-                                        <td> <img width="80px" src="{{Storage::url($adv['image'])}}"> </td>
+                                        <td>
+                                            <img width="50px" class="img-thumbnail img-fluid" src="{{asset('assets/images/advantage_images/'.$adv['image'])}}">
+                                        </td>
                                         <td>
                                             <button class="btn btn-primary btn-sm"
                                                     data-target="#edit_model_{{$adv['id']}}"

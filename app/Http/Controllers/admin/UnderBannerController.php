@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
+use App\Http\Traits\Upload_Images;
 use App\Models\Admin\under_banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class UnderBannerController extends Controller
 {
     use Message_Trait;
+    use Upload_Images;
     public function index()
     {
         $banners = under_banner::all();
@@ -49,22 +51,15 @@ class UnderBannerController extends Controller
             ]);
             /// Update Banner Image
             if ($request->hasFile('image')) {
-                $img_tmp = $request->file('image');
-
-                if ($img_tmp->isValid()) {
-
-                    $image = $request
-                        ->file('image')
-                        ->store('public/admin/images/under_banner');
+                $file_name = $this->saveImage($request->image, public_path('assets/images/under_banner'));
 
                     //remove Old Image
                     if ($banner['image'] != '') {
-                        Storage::delete($banner['image']);
+                        unlink('assets/images/under_banner/'.$banner['image']);
                     }
                     $banner->update([
-                        'image' => $image
+                        'image' => $file_name
                     ]);
-                }
             }
             return $this->success_message(' تم تعديل البانر بنجاح ');
         } catch (\Exception $e) {

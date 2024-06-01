@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
+use App\Http\Traits\Upload_Images;
 use App\Models\Admin\Product;
 use App\Models\Admin\website_advantage;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class AdvantageController extends Controller
 {
     use Message_Trait;
+    use Upload_Images;
 
     public function index(Request $request)
     {
@@ -45,16 +47,14 @@ class AdvantageController extends Controller
             $this->validate($request, $rules, $messages);
             $adv = new website_advantage();
             if ($request->hasFile('image')) {
-                $image_tmp = $request->file('image');
-                if ($image_tmp->isValid()) {
-                    $image = $request->file('image')->store('public/admin/images/advantage_images');
-                }
+                $file_name = $this->saveImage($request->image, public_path('assets/images/advantage_images'));
+
             }
             $adv->title = $alldata['title'];
             $adv->title_en = $alldata['title_en'];
             $adv->desc = $alldata['desc'];
             $adv->desc_en = $alldata['desc_en'];
-            $adv->image = $image;
+            $adv->image = $file_name;
             $adv->save();
             return $this->success_message('تم اضافة ميزة جديدة للمتجر ');
 
@@ -90,17 +90,15 @@ class AdvantageController extends Controller
             ];
             $this->validate($request, $rules, $messages);
             if ($request->hasFile('image')) {
-                $image_tmp = $request->file('image');
-                if ($image_tmp->isValid()) {
-                    $image = $request->file('image')->store('public/admin/images/advantage_images');
+                $file_name = $this->saveImage($request->image, public_path('assets/images/advantage_images'));
 
                     if ($adv['image'] !=''){
-                        Storage::delete($adv['image']);
+                        unlink('assets/images/advantage_images/'.$adv['image']);
                     }
                     $adv->update([
-                        'image'=>$image
+                        'image'=>$file_name
                     ]);
-                }
+
             }
             $adv->update([
                 'title'=>$alldata['title'],
@@ -119,7 +117,7 @@ class AdvantageController extends Controller
     {
         try {
             $adv = website_advantage::findOrFail($id);
-
+            unlink('assets/images/advantage_images/'.$adv['image']);
             $adv->delete();
             return $this->success_message('تم حذف الميرة بنجاح');
 

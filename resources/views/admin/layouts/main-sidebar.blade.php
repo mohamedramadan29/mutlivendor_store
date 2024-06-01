@@ -109,13 +109,7 @@
                 <li class="side-item side-item-category"> الأقسام والمنتجات</li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0V0z" fill="none"/>
-                            <path d="M15 11V4H4v8.17l.59-.58.58-.59H6z" opacity=".3"/>
-                            <path
-                                d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-5 7c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10zM4.59 11.59l-.59.58V4h11v7H5.17l-.58.59z"/>
-                        </svg>
+                        <i style="font-size: 22px;margin-left: 10px" class="bx bx-package"></i>
                         <span class="side-menu__label">  الأقسام والمنتجات  </span><i
                             class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
@@ -127,16 +121,10 @@
                         <li><a class="slide-item" href="{{url('admin/coupons')}}"> كوبونات الخصم  </a></li>
                     </ul>
                 </li>
-                <li class="side-item side-item-category"> المستخدمين  </li>
+                <li class="side-item side-item-category"> الطلبات  </li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0V0z" fill="none"/>
-                            <path d="M15 11V4H4v8.17l.59-.58.58-.59H6z" opacity=".3"/>
-                            <path
-                                d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-5 7c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10zM4.59 11.59l-.59.58V4h11v7H5.17l-.58.59z"/>
-                        </svg>
+                        <i style="font-size: 22px;margin-left: 10px" class="bx bx-cart"></i>
                         <span class="side-menu__label">  اداره الطلبات  </span><i
                             class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
@@ -144,33 +132,11 @@
                         </li>
                     </ul>
                 </li>
-                <li class="side-item side-item-category"> المستخدمين  </li>
+
+                <li class="side-item side-item-category"> حسابي  </li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0V0z" fill="none"/>
-                            <path d="M15 11V4H4v8.17l.59-.58.58-.59H6z" opacity=".3"/>
-                            <path
-                                d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-5 7c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10zM4.59 11.59l-.59.58V4h11v7H5.17l-.58.59z"/>
-                        </svg>
-                        <span class="side-menu__label">  بيانات المستخدمين  </span><i
-                            class="angle fe fe-chevron-down"></i></a>
-                    <ul class="slide-menu">
-                        <li><a class="slide-item" href="{{url('admin/users')}}"> مشاهده المستخدمين  </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="side-item side-item-category"> الاعدادات</li>
-                <li class="slide">
-                    <a class="side-menu__item" data-toggle="slide" href="">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0V0z" fill="none"/>
-                            <path d="M15 11V4H4v8.17l.59-.58.58-.59H6z" opacity=".3"/>
-                            <path
-                                d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-5 7c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10zM4.59 11.59l-.59.58V4h11v7H5.17l-.58.59z"/>
-                        </svg>
+                        <i style="font-size: 22px;margin-left: 10px" class="bx bx-cog"></i>
                         <span class="side-menu__label">  الاعدادات الشخصية </span><i
                             class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
@@ -179,17 +145,11 @@
                         <li><a class="slide-item" href="{{url('admin/update_admin_details')}}"> تعديل البيانات </a></li>
                     </ul>
                 </li>
-                <li class="side-item side-item-category"> إعدادات المشرفين</li>
+                <li class="side-item side-item-category"> المشرفين </li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0V0z" fill="none"/>
-                            <path d="M15 11V4H4v8.17l.59-.58.58-.59H6z" opacity=".3"/>
-                            <path
-                                d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-5 7c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10zM4.59 11.59l-.59.58V4h11v7H5.17l-.58.59z"/>
-                        </svg>
-                        <span class="side-menu__label"> الاعدادات </span><i class="angle fe fe-chevron-down"></i></a>
+                        <i style="font-size: 22px;margin-left: 10px" class="bx bx-user-plus"></i>
+                        <span class="side-menu__label">  المشرفين  </span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
                         <li><a class="slide-item" href="{{url('admin/admin/admin')}}"> الادمن </a></li>
                         <li><a class="slide-item" href="{{url('admin/admin/subadmins')}}"> المشرفين </a></li>
@@ -197,17 +157,11 @@
                         <li><a class="slide-item" href="{{url('admin/admin/all')}}"> مشاهدة الكل </a></li>
                     </ul>
                 </li>
-                <li class="side-item side-item-category"> إعدادات المستخدمين</li>
+                <li class="side-item side-item-category">   المستخدمين</li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0V0z" fill="none"/>
-                            <path d="M15 11V4H4v8.17l.59-.58.58-.59H6z" opacity=".3"/>
-                            <path
-                                d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-5 7c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10zM4.59 11.59l-.59.58V4h11v7H5.17l-.58.59z"/>
-                        </svg>
-                        <span class="side-menu__label"> الاعدادات </span><i class="angle fe fe-chevron-down"></i></a>
+                        <i style="font-size: 22px;margin-left: 10px" class="bx bx-user"></i>
+                        <span class="side-menu__label">   المستخدمين </span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
                         <li><a class="slide-item" href="{{url('admin/users')}}"> المستخدمين </a></li>
                         <li><a class="slide-item" href="{{url('admin/subscribers')}}"> المشتركين </a></li>
@@ -216,13 +170,7 @@
                 <li class="side-item side-item-category"> اعدادات الموقع</li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0V0z" fill="none"/>
-                            <path d="M15 11V4H4v8.17l.59-.58.58-.59H6z" opacity=".3"/>
-                            <path
-                                d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-5 7c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10zM4.59 11.59l-.59.58V4h11v7H5.17l-.58.59z"/>
-                        </svg>
+                        <i style="font-size: 22px;margin-left: 10px" class="bx bx-home"></i>
                         <span class="side-menu__label">  الصفحه الرئيسيه  </span><i
                             class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
@@ -232,9 +180,9 @@
                         <li><a class="slide-item" href="{{url('admin/front_titles')}}"> التحكم في العناوين الرئيسية   </a>
                         <li><a class="slide-item" href="{{url('admin/under_banner')}}"> البانر الاساسي    </a>
                         </li>
-
                     </ul>
                 </li>
+
             @endif
 
         </ul>

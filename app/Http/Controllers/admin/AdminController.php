@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
 use App\Models\Admin\Admin;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +19,8 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $last_orders = Order::orderBy('id','desc')->limit(10)->get();
+        return view('admin.dashboard',compact('last_orders'));
     }
 
     ////////////////////// Login Admin //////////////

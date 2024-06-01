@@ -70,7 +70,10 @@
                                     <tr>
                                         <td> {{$i++}} </td>
                                         <td> {{$brand['name']}} </td>
-                                        <td><img width="80px" src="{{\Illuminate\Support\Facades\Storage::url($brand['image'])}}" alt=""> </td>
+                                        <td>
+
+                                            <img width="50px" class="img-thumbnail img-fluid" src="{{asset('assets/images/brands/'.$brand['image'])}}">
+                                        </td>
                                         <td>
                                             @if($brand['status'] == 1)
                                                 <span class="badge badge-success"> نشط  </span>

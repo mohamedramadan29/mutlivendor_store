@@ -48,7 +48,7 @@
                                         <div class="shopping-cart__product-item">
                                             <a href="{{url('product_details/'.$item['productdata']['slug'])}}">
                                                 <img loading="lazy"
-                                                     src="{{Storage::url($item['productdata']['image'])}}" width="120"
+                                                     src="{{asset('assets/images/product_images/'.$item['productdata']['image'])}}" width="120"
                                                      height="120"
                                                      alt="">
                                             </a>

@@ -13,18 +13,9 @@
                              alt="Pattern" class="object-fit-cover">
                     </div>
 
-                    <div class="shop-banner__content container position-absolute start-50 top-50 translate-middle">
-                        <h2 class="stroke-text h1 smooth-16 text-uppercase fw-bold mb-3 mb-xl-4 mb-xl-5"> Search </h2>
-                        <ul class="d-flex flex-wrap list-unstyled text-uppercase h6">
-                            <?php
-                            $categories = \App\Models\admin\Category::all();
-                            ?>
-                            @foreach($categories as $category)
-                                <li class="me-3 me-xl-4 pe-1"><a href="{{url("category/".$category['slug'])}}"
-                                                                 class="menu-link menu-link_us-s"> {{$category['name']}} </a>
-                                </li>
-                            @endforeach
-                        </ul>
+                    <div class="shop-banner__content container position-absolute start-50 top-50">
+                        <h2 class="stroke-text h1 smooth-16 text-uppercase fw-bold mb-3 mb-xl-4 mb-xl-5 text-center"> نتائج البحث </h2>
+
                     </div><!-- /.shop-banner__content -->
                 </div><!-- /.shop-banner position-relative -->
             </div><!-- /.full-width_border -->
@@ -32,13 +23,13 @@
 
         <div class="mb-4 pb-lg-3"></div>
 
-        <section class="shop-main">
+        <section class="shop-main" dir="rtl">
             <div class="container">
                 <div class="d-flex justify-content-between mb-4 pb-md-2">
                     <div class="breadcrumb mb-0 d-none d-md-block flex-grow-1">
-                        <a href="{{url('/')}}" class="menu-link menu-link_us-s text-uppercase fw-medium">Home</a>
+                        <a href="{{url('/')}}" class="menu-link menu-link_us-s text-uppercase fw-medium"> الرئيسية  </a>
                         <span class="breadcrumb-separator menu-link fw-medium ps-1 pe-1">/</span>
-                        <a href="{{url('shop')}}" class="menu-link menu-link_us-s text-uppercase fw-medium">The Shop</a>
+                        <a href="{{url('shop')}}" class="menu-link menu-link_us-s text-uppercase fw-medium">  البحث  </a>
                     </div><!-- /.breadcrumb -->
 
                     <div
@@ -48,7 +39,7 @@
                             {{--                                <span class="title"> ترتيب حسب </span>--}}
                             <select aria-label="Sort Items" name="sort" title="sort-by"
                                     data-placeholder="Price: Low to High" id="sort"
-                                    class="chosen-select shop-acs__select form-select w-auto border-0 py-0 order-1 order-md-0">
+                                    class="chosen-select shop-acs__select form-select w-auto border-0 py-0 order-1 order-md-0 form-control">
                                 <option value="" selected> رتب حسب</option>
                                 <option @if(isset($_GET['sort']) && $_GET['sort'] == 'price_from_low_heigh') selected
                                         @endif value="price_from_low_heigh"> السعر : من الاقل الي الاعلي
@@ -95,7 +86,7 @@
                                             <div class="swiper-slide">
                                                 <a href="{{url('product_details/'.$product['slug'])}}"><img
                                                         loading="lazy"
-                                                        src="{{Storage::url($product['image'])}}"
+                                                        src="{{asset('assets/images/product_images/'.$product['image'])}}"
                                                         width="330" height="400"
                                                         alt="Cropped Faux leather Jacket"
                                                         class="pc__img"></a>
@@ -104,7 +95,7 @@
                                                 <div class="swiper-slide">
                                                     <a href="{{url('product_details/'.$product['slug'])}}"><img
                                                             loading="lazy"
-                                                            src="{{\Illuminate\Support\Facades\Storage::url($sub_image->image)}}"
+                                                            src="{{asset('assets/images/gallary_product_images/'.$sub_image['image'])}}"
                                                             width="330" height="400"
                                                             alt="Cropped Faux leather Jacket"
                                                             class="pc__img"></a>

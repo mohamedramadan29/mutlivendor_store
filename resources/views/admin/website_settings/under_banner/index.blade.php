@@ -70,7 +70,9 @@
                                         <td> {{$banner['title']}} </td>
                                         <td> {{$banner['sub_title']}} </td>
                                         <td> {{$banner['link']}} </td>
-                                        <td><img width="90px" src="{{Storage::url($banner->image)}}" alt=""> </td>
+                                        <td>
+                                            <img width="50px" class="img-thumbnail img-fluid" src="{{asset('assets/images/under_banner/'.$banner['image'])}}">
+                                        </td>
 
                                         <td>
                                             <button class="btn btn-primary btn-sm"

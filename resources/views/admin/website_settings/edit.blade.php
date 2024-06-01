@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <label> تعديل الصورة   </label>
                         <input type="file" name="image" class="form-control">
-                        <img src="{{Storage::url($adv['image'])}}" width="80px">
+                        <img width="50px" class="img-thumbnail img-fluid" src="{{asset('assets/images/advantage_images/'.$adv['image'])}}">
                     </div>
                 </div>
                 <div class="modal-footer">

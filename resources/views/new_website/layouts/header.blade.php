@@ -1,5 +1,5 @@
 <?php
-$categories = \App\Models\admin\Category::all();
+$categories = \App\Models\Admin\Category::all();
 $sections = \App\Models\Admin\Section::with('categories')->get();
 ?>
     <!DOCTYPE html>

@@ -20,7 +20,8 @@
                         <input type="hidden" name="brand_id" value="{{$brand['id']}}">
                         <label> تعديل صورة  </label>
                         <input type="file" name="image" class="form-control">
-                        <img width="80" src="{{Storage::url($brand['image'])}}">
+
+                        <img width="50px" class="img-thumbnail img-fluid" src="{{asset('assets/images/brands/'.$brand['image'])}}">
                     </div>
                     <div class="form-group">
                         <label> حالة القسم </label>

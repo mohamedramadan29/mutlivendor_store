@@ -23,7 +23,7 @@
                     <div class="swiper-slide">
                         <div class="overflow-hidden position-relative h-100">
                             <div class="slideshow-bg">
-                                <img loading="lazy" src="{{\Illuminate\Support\Facades\Storage::url($banner->image)}}"
+                                <img loading="lazy" src="{{asset('assets/images/banner_images/'.$banner['image'])}}"
                                      width="1920" height="600" alt="Pattern" class="slideshow-bg__img object-fit-cover">
                             </div>
                             <div class="slideshow-text container position-absolute top-50 translate-middle"
@@ -118,8 +118,9 @@
                             <div class="swiper-slide product-card">
                                 <div class="pc__img-wrapper">
                                     <a href="{{url('product_details/'.$product['slug'])}}">
-                                        <img loading="lazy" src="{{Storage::url($product['image'])}}" width="330"
+                                        <img loading="lazy" src="{{asset('assets/images/product_images/'.$product['image'])}}" width="330"
                                              height="400" alt="Cropped Faux leather Jacket" class="pc__img">
+
                                     </a>
                                     <form action="{{url('cart/add')}}" method="post">
                                         @csrf
@@ -147,14 +148,7 @@
                                                 <use href="#icon_heart"></use>
                                             </svg>
                                         </button>
-                                        {{--                                        <button--}}
-                                        {{--                                            class="btn btn-square btn-hover-primary d-block border-1 text-uppercase js-quick-view"--}}
-                                        {{--                                            data-bs-toggle="modal" data-bs-target="#quickView" title="Quick view">--}}
-                                        {{--                                            <svg class="d-inline-block" width="14" height="14" viewBox="0 0 18 18"--}}
-                                        {{--                                                 xmlns="http://www.w3.org/2000/svg">--}}
-                                        {{--                                                <use href="#icon_view"></use>--}}
-                                        {{--                                            </svg>--}}
-                                        {{--                                        </button>--}}
+
                                     </div>
                                 </div>
 
@@ -233,7 +227,7 @@
                             @foreach($categories as $category)
                                 <div class="swiper-slide">
                                     <img loading="lazy" class="w-100 mb-3"
-                                         src="{{\Illuminate\Support\Facades\Storage::url($category['image'])}}"
+                                         src="{{asset('assets/images/category_images/'.$category['image'])}}"
                                          width="330"
                                          height="400" alt="">
                                     <div class="text-center">
@@ -294,7 +288,7 @@
                             <div class="swiper-slide product-card">
                                 <div class="pc__img-wrapper">
                                     <a href="{{url('product_details/'.$product['slug'])}}">
-                                        <img loading="lazy" src="{{Storage::url($product['image'])}}" width="330"
+                                        <img loading="lazy" src="{{asset('assets/images/product_images/'.$product['image'])}}" width="330"
                                              height="400" alt="Cropped Faux leather Jacket" class="pc__img">
                                     </a>
                                     <form action="{{url('cart/add')}}" method="post">
@@ -323,14 +317,7 @@
                                                 <use href="#icon_heart"></use>
                                             </svg>
                                         </button>
-                                        {{--                                        <button--}}
-                                        {{--                                            class="btn btn-square btn-hover-primary d-block border-1 text-uppercase js-quick-view"--}}
-                                        {{--                                            data-bs-toggle="modal" data-bs-target="#quickView" title="Quick view">--}}
-                                        {{--                                            <svg class="d-inline-block" width="14" height="14" viewBox="0 0 18 18"--}}
-                                        {{--                                                 xmlns="http://www.w3.org/2000/svg">--}}
-                                        {{--                                                <use href="#icon_view"></use>--}}
-                                        {{--                                            </svg>--}}
-                                        {{--                                        </button>--}}
+
                                     </div>
                                 </div>
 
@@ -370,7 +357,7 @@
 
         <section class="lookbook-products container">
             <div class="position-relative">
-                <img loading="lazy" src="{{Storage::url($under_banner['image'])}}"
+                <img loading="lazy" src="{{asset('assets/images/under_banner/'.$under_banner['image'])}}"
                      class="w-100 h-auto" width="1410" height="600" alt="">
                 <div class="content d-none d-lg-block text-center py-5 px-5 bg-white position-absolute position-center">
                     <h3 class="fs-22 fw-medium text-uppercase mb-2"> {{$under_banner['title']}} </h3>
@@ -422,7 +409,7 @@
                             @foreach($brands as $brand)
                                 <div class="swiper-slide">
                                     <img loading="lazy"
-                                         src="{{\Illuminate\Support\Facades\Storage::url($brand['image'])}}"
+                                         src="{{asset('assets/images/brands/'.$brand['image'])}}"
                                          width="120" height="20" alt="">
                                 </div>
                             @endforeach

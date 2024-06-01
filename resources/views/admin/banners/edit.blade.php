@@ -29,7 +29,8 @@
                     <div class="form-group">
                         <label> الصوره  </label>
                         <input type="file" name="image" class="form-control">
-                        <img width="80px" height="80px" src="{{\Illuminate\Support\Facades\Storage::url($banner->image)}}" alt="">
+                        <img width="50px" class="img-thumbnail img-fluid"
+                             src="{{asset('assets/images/banner_images/'.$banner['image'])}}">
                     </div>
                     <div class="form-group">
                         <label> الحاله  </label>

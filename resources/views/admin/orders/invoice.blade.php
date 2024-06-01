@@ -83,8 +83,7 @@
                                             @php
                                                 $getproductImage = \App\Models\admin\Product::getproductImage($product['product_id']);
                                             @endphp
-                                            <img class="img-fluid" width="80px" height="80px"
-                                                 src="{{\Illuminate\Support\Facades\Storage::url($getproductImage)}}">
+                                            <img width="50px" class="img-thumbnail img-fluid" src="{{asset('assets/images/product_images/'.$getproductImage)}}">
                                         </td>
                                         <td> {{$product['product_name']}} </td>
                                         <td> {{$product['product_price']}} </td>

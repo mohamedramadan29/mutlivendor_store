@@ -94,10 +94,9 @@
                                             @endif
                                         </td>
 
-                                        <td><img width="50px" class="img-thumbnail img-fluid"
-                                                 src="{{ Storage::url($product['image']) }}">
+                                        <td>
+                                            <img width="50px" class="img-thumbnail img-fluid" src="{{asset('assets/images/product_images/'.$product['image'])}}">
 
-{{--                                            <img class="img-thumbnail img-fluid" width="50px" src="{{ asset('public/'.Storage::url($product['image'])) }}">--}}
                                         </td>
                                         <td>
                                             @if ($product['status'] == 1)

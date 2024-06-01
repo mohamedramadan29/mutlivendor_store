@@ -4,7 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Slug_Trait;
-use App\Models\admin\Category;
+use App\Http\Traits\Upload_Images;
+use App\Models\Admin\Category;
 use App\Models\Admin\Section;
 use Illuminate\Http\Request;
 use App\Http\Traits\Message_Trait;
@@ -15,12 +16,13 @@ class CategoriesController extends Controller
 {
     use Message_Trait;
     use Slug_Trait;
+    use Upload_Images;
 
     public function index()
     {
         $allcategories = Category::with('parentCategory', 'section')->get();
         //dd($allcategories);
-       return view('admin.categories.index', compact('allcategories'));
+        return view('admin.categories.index', compact('allcategories'));
     }
 
     // Add New Category
@@ -51,12 +53,7 @@ class CategoriesController extends Controller
                 $this->validate($request, $rules, $customeMessage);
                 /// Upload Admin Photo
                 if ($request->hasFile('image')) {
-                    $img_tmp = $request->file('image');
-                    if ($img_tmp->isValid()) {
-                        $image = $request
-                            ->file('image')
-                            ->store('public/admin/images/category_images');
-                    }
+                    $file_name = $this->saveImage($request->image, public_path('assets/images/category_images'));
                 }
                 $new_category->name = $alldata['name'];
                 $new_category->slug = $this->CustomeSlug($alldata['name']);
@@ -67,7 +64,7 @@ class CategoriesController extends Controller
                 $new_category->meta_title = $alldata['meta_title'];
                 $new_category->meta_description = $alldata['meta_description'];
                 $new_category->meta_keywords = $alldata['meta_keywords'];
-                $new_category->image = $image;
+                $new_category->image = $file_name;
                 $new_category->save();
                 return $this->success_message('تمت الاضافة بنجاح');
             } catch (\Exception $e) {
@@ -95,19 +92,17 @@ class CategoriesController extends Controller
                 $update_data = $request->all();
                 /// Upload Category Image
                 if ($request->hasFile('image')) {
-                    $img_tmp = $request->file('image');
-                    if ($img_tmp->isValid()) {
-                        $image = $request
-                            ->file('image')
-                            ->store('public/admin/images/category_images');
-                        // delete old image
-                        if ($category['image'] != '') {
-                            Storage::delete($category['image']);
-                        }
-                        $category->update([
-                            'image' => $image,
-                        ]);
+                    $file_name = $this->saveImage($request->image, public_path('assets/images/category_images'));
+                    // delete old image
+                    // حذف الصورة القديمة
+                    if ($category['image'] != '') {
+                        unlink('assets/images/category_images/'.$category['image']);
+
                     }
+                    $category->update([
+                        'image' => $file_name,
+                    ]);
+
                 }
                 $category->update([
                     'name' => $update_data['name'],
@@ -138,7 +133,7 @@ class CategoriesController extends Controller
         try {
             $category = Category::findOrFail($id);
             if ($category['image'] != '') {
-                Storage::delete($category['image']);
+                unlink('assets/images/category_images/'.$category['image']);
             }
             $category->delete();
             return $this->success_message('تم حذف القسم بنجاح');

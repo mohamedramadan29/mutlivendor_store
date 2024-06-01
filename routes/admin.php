@@ -3,13 +3,13 @@
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoriesController;
 use App\Http\Controllers\admin\VendorController;
-use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\admin\SectionController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\BannerController;
 use App\Http\Controllers\admin\CouponController;
-use App\Http\Controllers\Admin\UserController;
-use \App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\admin\UserController;
+use \App\Http\Controllers\admin\OrdersController;
 use \App\Http\Controllers\admin\AdvantageController;
 use \App\Http\Controllers\Front\FrontTitleController;
 use \App\Http\Controllers\admin\UnderBannerController;

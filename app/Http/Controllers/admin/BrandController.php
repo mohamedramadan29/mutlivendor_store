@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\Message_Trait;
+use App\Http\Traits\Upload_Images;
 use App\Models\Admin\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -11,13 +12,15 @@ use Illuminate\Support\Facades\Storage;
 class BrandController extends Controller
 {
     use Message_Trait;
+    use Upload_Images;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $brands = Brand::all();
-        return view('admin.brands.index',compact('brands'));
+        return view('admin.brands.index', compact('brands'));
     }
 
     /**
@@ -36,20 +39,17 @@ class BrandController extends Controller
                 'name.min' => 'من فضلك ادخل اسم القسم بشكل صحيح',
             ];
             $this->validate($request, $rules, $custome_messages);
-            if ($request->hasFile('image')){
-                $img_tmp = $request->file('image');
-                if($img_tmp->isValid()){
-                    $image = $request->file('image')->store('public/admin/images/brands');
-                }
+            if ($request->hasFile('image')) {
+                $file_name = $this->saveImage($request->image, public_path('assets/images/brands'));
             }
             $brand = new Brand();
 
             $brand->name = $new_brands['name'];
-            $brand->image = $image;
+            $brand->image = $file_name;
             $brand->status = $new_brands['status'];
             $brand->save();
             return $this->success_message(' تم اضافه علامه تجارية بنجاح ');
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return $this->exception_message($e);
         }
     }
@@ -69,18 +69,16 @@ class BrandController extends Controller
                 'brand_name.min' => 'من فضلك ادخل اسم العلامة بشكل صحيح',
             ];
             $this->validate($request, $rules, $custome_messages);
-            if ($request->hasFile('image')){
-                $img_tmp = $request->file('image');
-                if($img_tmp->isValid()){
-                    $image = $request->file('image')->store('public/admin/images/brands');
-                    // delete old image
-                    if ($brand['image'] != '') {
-                        Storage::delete($brand['image']);
-                    }
-                    $brand->update([
-                        'image'=>$image,
-                    ]);
+            if ($request->hasFile('image')) {
+                $file_name = $this->saveImage($request->image, public_path('assets/images/brands'));
+                // delete old image
+                if ($brand['image'] != '') {
+                    unlink('assets/images/brands'.$brand['image']);
                 }
+                $brand->update([
+                    'image' => $file_name,
+                ]);
+
             }
             $brand->update([
                 'name' => $brand_data['brand_name'],
@@ -91,7 +89,6 @@ class BrandController extends Controller
             return $this->exception_message($e);
         }
     }
-
 
 
     public function delete($id)

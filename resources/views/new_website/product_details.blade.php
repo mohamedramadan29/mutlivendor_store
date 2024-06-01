@@ -13,9 +13,9 @@
                             <div class="swiper-container">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide product-single__image-item">
-                                        <img loading="lazy" class="h-auto" src="{{Storage::url($product->image)}}"
+                                        <img loading="lazy" class="h-auto" src="{{asset('assets/images/product_images/'.$product['image'])}}"
                                              width="674" height="674" alt="">
-                                        <a data-fancybox="gallery" href="{{Storage::url($product->image)}}"
+                                        <a data-fancybox="gallery" href="{{asset('assets/images/product_images/'.$product['image'])}}"
                                            data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom">
                                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
@@ -27,10 +27,10 @@
                                         @foreach($product['productImages'] as $sub_image)
                                             <div class="swiper-slide product-single__image-item">
                                                 <img loading="lazy" class="h-auto"
-                                                     src="{{\Illuminate\Support\Facades\Storage::url($sub_image->image)}}"
+                                                     src="{{asset('assets/images/gallary_product_images/'.$sub_image['image'])}}"
                                                      width="674" height="674" alt="">
                                                 <a data-fancybox="gallery"
-                                                   href="{{\Illuminate\Support\Facades\Storage::url($sub_image->image)}}"
+                                                   href="{{asset('assets/images/gallary_product_images/'.$sub_image['image'])}}"
                                                    data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom">
                                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -58,14 +58,14 @@
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide product-single__image-item"><img loading="lazy"
                                                                                               class="h-auto"
-                                                                                              src="{{Storage::url($product->image)}}"
+                                                                                              src="{{asset('assets/images/product_images/'.$product['image'])}}"
                                                                                               width="104" height="104"
                                                                                               alt=""></div>
                                     @if($product['productImages'] !=null)
                                         @foreach($product['productImages'] as $sub_image)
                                             <div class="swiper-slide product-single__image-item"><img loading="lazy"
                                                                                                       class="h-auto"
-                                                                                                      src="{{\Illuminate\Support\Facades\Storage::url($sub_image->image)}}"
+                                                                                                      src="{{asset('assets/images/gallary_product_images/'.$sub_image['image'])}}"
                                                                                                       width="104"
                                                                                                       height="104"
                                                                                                       alt=""></div>
@@ -333,10 +333,10 @@
                             <div class="swiper-slide product-card">
                                 <div class="pc__img-wrapper">
                                     <a href="{{url('product_details/'.$product['slug'])}}">
-                                        <img loading="lazy" src="{{Storage::url($product['image'])}}" width="330"
+                                        <img loading="lazy" src="{{asset('assets/images/product_images/'.$product['image'])}}" width="330"
                                              height="400"
                                              alt="Cropped Faux leather Jacket" class="pc__img">
-                                        <img loading="lazy" src="{{Storage::url($product['image'])}}" width="330"
+                                        <img loading="lazy" src="{{asset('assets/images/product_images/'.$product['image'])}}" width="330"
                                              height="400" alt="Cropped Faux leather Jacket"
                                              class="pc__img pc__img-second">
                                     </a>
@@ -367,14 +367,6 @@
                                         <span class="money price" dir="rtl">{{$product['price']}}   ر.س  </span>
                                     </div>
 
-{{--                                    <button--}}
-{{--                                        class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"--}}
-{{--                                        title="Add To Wishlist">--}}
-{{--                                        <svg width="16" height="16" viewBox="0 0 20 20" fill="none"--}}
-{{--                                             xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                            <use href="#icon_heart"/>--}}
-{{--                                        </svg>--}}
-{{--                                    </button>--}}
                                 </div>
                             </div>
                         @endforeach

@@ -44,6 +44,78 @@ return [
             'throw' => false,
         ],
 
+        'product_images' => [
+            'driver' => 'local',
+            'root' => base_path('public/assets/images/product_images'), // Use base_path() directly with the path
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'gallary_product_images' => [
+            'driver' => 'local',
+            'root' => base_path('public/assets/images/gallary_product_images'), // Use base_path() directly with the path
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'admin_images' => [
+            'driver' => 'local',
+            'root' => base_path('public/assets/images/admin_images'), // Use base_path() directly with the path
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'advantage_images' => [
+            'driver' => 'local',
+            'root' => base_path('public/assets/images/advantage_images'), // Use base_path() directly with the path
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'banner_images' => [
+            'driver' => 'local',
+            'root' => base_path('public/assets/images/banner_images'), // Use base_path() directly with the path
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'brands' => [
+            'driver' => 'local',
+            'root' => base_path('public/assets/images/brands'), // Use base_path() directly with the path
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'category_images' => [
+            'driver' => 'local',
+            'root' => base_path('public/assets/images/category_images'), // Use base_path() directly with the path
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'store_logo' => [
+            'driver' => 'local',
+            'root' => base_path('public/assets/images/store_logo'), // Use base_path() directly with the path
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'under_banner' => [
+            'driver' => 'local',
+            'root' => base_path('public/assets/images/under_banner'), // Use base_path() directly with the path
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'vendor_images' => [
+            'driver' => 'local',
+            'root' => base_path('public/assets/images/vendor_images'), // Use base_path() directly with the path
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
