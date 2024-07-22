@@ -174,9 +174,9 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="paymentmethod"
-                                       id="flexRadioDefault2" value="online_tap">
-                                <label class="form-check-label" for="flexRadioDefault2">
+                                <input class="form-check-input" type="radio" name="paypal"
+                                       id="paypal" value="paypal">
+                                <label class="form-check-label" for="paypal">
                                    الدفع اون لاين
                                 </label>
                             </div>

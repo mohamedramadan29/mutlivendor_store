@@ -58,16 +58,15 @@ class CheckoutController extends Controller
                 ];
                 $this->validate($request, $rules, $CustomeMessage);
                 $payment_method = $alldata['paymentmethod'];
+                DB::beginTransaction();
                 if ($payment_method == 'cod') {
                     $payment_method = 'cod';
                     $status = 'new';
                 } else {
                     // prepare It
-                    $payment_method = 'online';
+                    $payment_method = 'paypal';
                     $status = 'pending';
-                    return redirect('payment');
                 }
-                DB::beginTransaction();
                 // Fetch Order Total Price
                 $total_price = 0;
                 foreach ($cartItems as $item) {
@@ -124,6 +123,16 @@ class CheckoutController extends Controller
                 DB::commit();
                 // Insert Order ID In Session
                 Session::put('order_id',$order_id);
+                if ($payment_method == 'cod') {
+                    $payment_method = 'cod';
+                    $status = 'new';
+                } else {
+                    // prepare It
+                    $payment_method = 'paypal';
+                    $status = 'pending';
+                    return redirect('paypal');
+                }
+
                return redirect('thanks');
             }
         } catch (\Exception $e) {

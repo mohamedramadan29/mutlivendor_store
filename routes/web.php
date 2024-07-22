@@ -43,9 +43,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('thanks',[CheckoutController::class,'thanks']);
     // User Orders
     Route::get('orders/index/{id?}',[OrderController::class,'orders']);
-
     //Start Payment Routes
     Route::match(['post','get'],'payment',[PaymentController::class,'index']);
+    Route::controller(\App\Http\Controllers\Front\PaypalController::class)->group(function (){
+       Route::get('paypal','paypal');
+       Route::post('pay','pay')->name('payment');
+       Route::get('success','success');
+       Route::get('error','errorPayment');
+    });
 });
 
 
